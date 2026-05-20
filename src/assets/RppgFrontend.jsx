@@ -5,7 +5,6 @@ export default function RppgLiveDashboard() {
   const canvasRef = useRef(null);
   const wsRef = useRef(null);
   const loopRef = useRef(null);
-  const accumulatorRef = useRef(null);
 
   const [metrics, setMetrics] = useState({ bpm: 'Disconnected', faceDetected: false, buffer: '0/150' });
   const [logs, setLogs] = useState([]);

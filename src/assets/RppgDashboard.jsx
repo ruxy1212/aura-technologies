@@ -297,11 +297,12 @@ export default function RppgDashboard() {
   const canvasRef = useRef(null);
   const wsRef     = useRef(null);
   const loopRef   = useRef(null);
+  const accumulatorRef = useRef(null);
 
   const [isStreaming, setIsStreaming] = useState(false);
 
   // Each feature group in its own state slice — granular updates, no full re-render
-  const [status,     setStatus]     = useState({ faceDetected: false, buffer: '0/150' });
+  const [status,     setStatus]     = useState({ faceDetected: false, buffer: '0/150', motion_artifact: false });
   const [pulseRate,  setPulseRate]  = useState({ bpm: null, snr: null, confidence: 0, waveform: [] });
   const [hrv,        setHrv]        = useState({ rmssd: null, sdnn: null, confidence: 0 });
   const [breathing,  setBreathing]  = useState({ brpm: null, confidence: 0, upper_waveform: [], lower_waveform: [] });
@@ -321,18 +322,26 @@ export default function RppgDashboard() {
   const handleMessage = useCallback((event) => {
     const d = JSON.parse(event.data);
 
-    setStatus({
-      faceDetected: d.face_detected,
-      buffer:       d.buffer_status,
-    });
+    // setStatus({
+    //   faceDetected: d.face_detected,
+    //   buffer:       d.buffer_status,
+    // });
 
     if (d.pulse_rate) {
-      setPulseRate(d.pulse_rate);
+      // setPulseRate(d.pulse_rate);
       if (typeof d.pulse_rate.bpm === 'number') {
-        setLogs(prev => [
-          { time: new Date().toLocaleTimeString(), bpm: d.pulse_rate.bpm },
-          ...prev.slice(0, 19),
-        ]);
+        // setLogs(prev => [
+        //   { time: new Date().toLocaleTimeString(), bpm: d.pulse_rate.bpm },
+        //   ...prev.slice(0, 19),
+        // ]);
+        setLogs(prev => {
+          const updated = [
+            { time: new Date().toLocaleTimeString(), bpm: d.pulse_rate.bpm },
+            ...prev,              // newest entry at top
+          ];
+          return updated.slice(0, 20);  // always trim to 20, dropping the oldest off the bottom
+        });
+
         // Append latest waveform slice to sparkline history
         if (Array.isArray(d.pulse_rate.waveform) && d.pulse_rate.waveform.length) {
           waveformHistory.current = [
@@ -344,13 +353,13 @@ export default function RppgDashboard() {
       }
     }
 
-    if (d.hrv)        setHrv(d.hrv);
-    if (d.expression) setExpression(d.expression);
-    if (d.blink)      setBlink(d.blink);
-    if (typeof d.talking === 'boolean') setTalking(d.talking);
+    // if (d.hrv)        setHrv(d.hrv);
+    // if (d.expression) setExpression(d.expression);
+    // if (d.blink)      setBlink(d.blink);
+    // if (typeof d.talking === 'boolean') setTalking(d.talking);
 
     if (d.breathing) {
-      setBreathing(d.breathing);
+      // setBreathing(d.breathing);
       if (d.breathing.upper_waveform?.length) {
         upperBreathHistory.current = [...upperBreathHistory.current, ...d.breathing.upper_waveform].slice(-90);
         setUpperBreathSnap([...upperBreathHistory.current]);
@@ -360,6 +369,7 @@ export default function RppgDashboard() {
         setLowerBreathSnap([...lowerBreathHistory.current]);
       }
     }
+    accumulatorRef.current = d;
   }, []);
 
   const captureAndSendFrame = useCallback(() => {
@@ -381,6 +391,19 @@ export default function RppgDashboard() {
       setIsStreaming(true);
     };
 
+    // ws.onmessage = (event) => {
+    //   const d = JSON.parse(event.data);
+
+    //   // Path 1 — always runs, every frame (waveforms need continuous data)
+    //   if (Array.isArray(d.pulse_rate.waveform) &&  d.pulse_rate?.waveform?.length) {
+    //     waveformHistory.current = [...waveformHistory.current, ...d.pulse_rate.waveform].slice(-120);
+    //     setWaveformSnap([...waveformHistory.current]);   // still live
+    //   }
+    //   // ... same for upper/lower breath waveforms
+
+    //   // Path 2 — just store the latest payload, don't setState yet
+    //   accumulatorRef.current = d;
+    // };
     ws.onmessage = handleMessage;
 
     ws.onclose = () => {
@@ -423,7 +446,7 @@ export default function RppgDashboard() {
       videoRef.current.srcObject.getTracks().forEach(t => t.stop());
     }
     setIsStreaming(false);
-    setStatus({ faceDetected: false, buffer: '0/150' });
+    setStatus({ faceDetected: false, buffer: '0/150', motion_artifact: false });
     setPulseRate({ bpm: null, snr: null, confidence: 0, waveform: [] });
     setHrv({ rmssd: null, sdnn: null, confidence: 0 });
     setBreathing({ brpm: null, confidence: 0, upper_waveform: [], lower_waveform: [] });
@@ -439,6 +462,29 @@ export default function RppgDashboard() {
   }, []);
 
   useEffect(() => () => stopPipeline(), []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const d = accumulatorRef.current;
+      if (!d) return;
+
+      setPulseRate(d.pulse_rate);
+      setHrv(d.hrv);
+      setBreathing(prev => {
+        if (!d?.breathing) return prev; // Guard against empty data
+        return {
+          ...prev,
+          ...d.breathing,
+          out_of_frame: d.breathing.out_of_frame ?? prev.out_of_frame ?? false
+        };
+      });
+      setExpression(d.expression);
+      setBlink(d.blink);
+      setTalking(d.talking);
+      setStatus({ faceDetected: d.face_detected, buffer: d.buffer_status, motion_artifact: d.motion_artifact ?? false });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   // ── Layout ────────────────────────────────────────────────────────────────
   return (
@@ -555,7 +601,7 @@ export default function RppgDashboard() {
               overflow: 'hidden',
               border: '1px solid #1e2d3d',
               flexShrink: 0,
-              top: 0,
+              top: '8px',
             }}>
               <video
                 ref={videoRef}
@@ -580,22 +626,24 @@ export default function RppgDashboard() {
                   borderRadius: '4px',
                   background: 'rgba(7,13,20,0.75)',
                   border: `1px solid ${status.faceDetected ? '#48bb78' : '#fc8181'}`,
-                  color: status.faceDetected ? '#48bb78' : '#fc8181',
+                  color: isStreaming && status.faceDetected ? '#48bb78' : '#fc8181',
                 }}>
-                  {status.faceDetected ? 'FACE LOCKED' : 'SEARCHING'}
+                  {isStreaming ? status.faceDetected ? 'FACE LOCKED' : 'SEARCHING' : 'DISCONNECTED'}
                 </span>
-                <span style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: '10px',
-                  letterSpacing: '0.1em',
-                  padding: '3px 8px',
-                  borderRadius: '4px',
-                  background: 'rgba(7,13,20,0.75)',
-                  border: '1px solid #1e2d3d',
-                  color: '#4a7fa5',
-                }}>
-                  BUF {status.buffer}
-                </span>
+                {isStreaming && (
+                  <span style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: '10px',
+                    letterSpacing: '0.1em',
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    background: 'rgba(7,13,20,0.75)',
+                    border: '1px solid #1e2d3d',
+                    color: '#4a7fa5',
+                  }}>
+                    BUF {status.buffer}
+                  </span>
+                )}
                 {talking && (
                   <span style={{
                     fontFamily: "'DM Mono', monospace",
@@ -632,7 +680,7 @@ export default function RppgDashboard() {
             </div>
 
             {/* BPM log */}
-            <Panel title="Measurement Log" badge={`${logs.length} entries`} style={{ height: '220px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <Panel title="Heart Rate Measurement Log" badge={`${logs.length} entries`} style={{ height: '220px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ overflowY: 'auto', flex: 1 }}>
                 {logs.length === 0
                   ? <span style={{ fontSize: '10px', color: '#2d3748' }}>Awaiting signal lock…</span>
@@ -659,7 +707,24 @@ export default function RppgDashboard() {
                   </div>
                 </div>
               </div>
+              {/* <ConfBar value={pulseRate.confidence} /> */}
               <ConfBar value={pulseRate.confidence} />
+              {status.motion_artifact && (
+                <div style={{
+                  marginTop: '8px',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: '10px',
+                  letterSpacing: '0.1em',
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  background: 'rgba(236,201,75,0.10)',
+                  color: '#ecc94b',
+                  border: '1px solid rgba(236,201,75,0.3)',
+                  display: 'inline-block',
+                }}>
+                  ⚠ MOTION — hold still
+                </div>
+              )}
             </Panel>
 
             {/* HRV */}
@@ -696,6 +761,22 @@ export default function RppgDashboard() {
                 </div>
               </div>
               <ConfBar value={breathing.confidence} />
+              {breathing.out_of_frame && (
+                <div style={{
+                  marginTop: '8px',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: '10px',
+                  letterSpacing: '0.1em',
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  background: 'rgba(113,128,150,0.10)',
+                  color: '#718096',
+                  border: '1px solid rgba(113,128,150,0.3)',
+                  display: 'inline-block',
+                }}>
+                  NO CHEST IN FRAME — move camera back
+                </div>
+              )}
             </Panel>
 
             {/* Expression */}
