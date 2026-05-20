@@ -291,6 +291,9 @@ function LogRow({ time, bpm }) {
   );
 }
 
+const TIMES = 10;
+let COUNT = 0;
+
 // ─── Main dashboard ───────────────────────────────────────────────────────────
 export default function RppgDashboard() {
   const videoRef  = useRef(null);
@@ -320,8 +323,10 @@ export default function RppgDashboard() {
   const [lowerBreathSnap, setLowerBreathSnap] = useState([]);
 
   const handleMessage = useCallback((event) => {
+    console.log('it is having a message');
     const d = JSON.parse(event.data);
-
+    COUNT++;
+    if (COUNT < TIMES ) console.log(d); 
     // setStatus({
     //   faceDetected: d.face_detected,
     //   buffer:       d.buffer_status,
@@ -384,10 +389,11 @@ export default function RppgDashboard() {
   }, []);
 
   const initWebSocket = useCallback(() => {
-    const ws = new WebSocket('ws://127.0.0.1:8007/ws/stream');
+    // const ws = new WebSocket('ws://127.0.0.1:8007/ws/stream');
+    const ws = new WebSocket('wss://aura-backend-py.onrender.com/ws/stream');
     wsRef.current = ws;
 
-    ws.onopen = () => {
+    ws.onopen = () => { console.log('it is open');
       setIsStreaming(true);
     };
 
@@ -406,7 +412,7 @@ export default function RppgDashboard() {
     // };
     ws.onmessage = handleMessage;
 
-    ws.onclose = () => {
+    ws.onclose = () => { console.log('it is closing');
       setIsStreaming(false);
       clearTimeout(loopRef.current);
     };

@@ -1,0 +1,215 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── Top bar ── */
+.topbar {
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-mid);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.logoSymbol {
+  color: var(--signal);
+  font-size: 16px;
+  filter: drop-shadow(var(--signal-glow));
+  animation: beat 1.4s ease-in-out infinite;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.15); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.08); }
+}
+
+.logoText {
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.separator {
+  color: var(--text-dim);
+  margin: 0 2px;
+}
+
+.pageLabel {
+  color: var(--text-secondary);
+  letter-spacing: 0.10em;
+  font-size: 11px;
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userEmail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.logoutBtn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--r-sm);
+  padding: 4px 10px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.logoutBtn:hover {
+  color: var(--red);
+  border-color: rgba(255, 77, 77, 0.35);
+}
+
+/* ── Body ── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 180px;
+  flex-shrink: 0;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-mid);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+  flex: 1;
+}
+
+.navItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  position: relative;
+  transition: background 0.12s, color 0.12s;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+}
+
+.navItem.active {
+  background: var(--signal-faint);
+  color: var(--signal);
+}
+
+.navSymbol {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.activeBar {
+  width: 3px;
+  height: 16px;
+  background: var(--signal);
+  border-radius: 2px;
+  box-shadow: var(--signal-glow);
+}
+
+.sidebarFooter {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-dim);
+}
+
+.versionTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+/* ── Main content ── */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Subtle scanline overlay — purely cosmetic */
+.scanline {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 32px;
+  max-width: 960px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 20px 16px;
+  }
+
+  .userEmail {
+    display: none;
+  }
+}

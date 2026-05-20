@@ -1,0 +1,334 @@
+.root {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── Brand / left panel ── */
+.brand {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  border-right: 1px solid var(--border-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Radial highlight behind brand content */
+.brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 60%,
+    rgba(0, 255, 140, 0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.brandInner {
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.logoMark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.logoSymbol {
+  font-size: 28px;
+  color: var(--signal);
+  filter: drop-shadow(var(--signal-glow));
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.18); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.10); }
+}
+
+.logoText {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.ecgWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+
+.statList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.statItem:last-child {
+  border-bottom: none;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--signal);
+}
+
+/* ── Form / right panel ── */
+.formPanel {
+  width: 440px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.formCard {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-mid);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: var(--signal-glow);
+}
+
+.cardTitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+/* ── Form internals ── */
+.form {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin-bottom: -8px;
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-void);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: var(--text-dim);
+}
+
+.input:focus {
+  border-color: var(--signal-dim);
+  box-shadow: 0 0 0 3px var(--signal-faint);
+}
+
+.btn {
+  width: 100%;
+  padding: 11px 0;
+  background: var(--signal-faint);
+  border: 1px solid var(--signal-dim);
+  border-radius: var(--r-md);
+  color: var(--signal);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  transition: background 0.15s, box-shadow 0.15s;
+  margin-top: 4px;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(0, 255, 140, 0.18);
+  box-shadow: var(--signal-glow);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  width: 100%;
+  padding: 10px 0;
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-md);
+  color: var(--text-secondary);
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btnGhost:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+
+.subtext {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skipLink {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--signal-dim);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+}
+
+.error {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--red);
+  background: var(--red-faint);
+  border: 1px solid rgba(255, 77, 77, 0.25);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-dim);
+}
+
+/* Sent state */
+.sentIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--signal-faint);
+  border: 1px solid var(--signal-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--signal);
+  align-self: center;
+  box-shadow: var(--signal-glow);
+}
+
+.sentText {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.sentEmail {
+  font-family: var(--font-mono);
+  color: var(--signal);
+}
+
+/* ── Footnote ── */
+.footnote {
+  margin-top: 24px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .brand {
+    border-right: none;
+    border-bottom: 1px solid var(--border-mid);
+    padding: 36px 24px;
+  }
+
+  .ecgWrapper {
+    display: none;
+  }
+
+  .formPanel {
+    width: 100%;
+    padding: 32px 20px;
+  }
+}

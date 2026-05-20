@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import RppgLiveDashboard from './assets/RppgFrontend.jsx'
 import RppgDashboard from './assets/RppgDashboard.jsx'
+import Layout from './app/Layout.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/rppg-test",
     element: <RppgLiveDashboard />,
+  },
+  {
+    path: "/frontend",
+    element: <Layout />,
   },
 ]);
 
