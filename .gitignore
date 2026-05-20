@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+
+not_in_use
