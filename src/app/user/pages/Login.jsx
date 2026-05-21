@@ -63,7 +63,7 @@ export default function LoginPage({ onLogin }) {
           </p>
           <div className={styles.ecgWrapper}>
             <EcgLine width={380} height={56} />
-            <EcgLine width={380} height={56} color="rgba(0,255,140,0.3)" />
+            <EcgLine width={380} height={56} color="rgba(200,150,58,0.35)" />
           </div>
           <ul className={styles.statList}>
             {[

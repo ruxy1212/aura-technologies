@@ -1,4 +1,4 @@
-export default function VideoContainer({ isStreaming, videoRef, canvasRef, status, talking, startCamera, stopPipeline }) {
+export default function VideoContainer({ isStreaming, videoRef, canvasRef, status, talking, onLaunch, stopPipeline }) {
   return (
     <div className="scan-overlay" style={{
       position: 'sticky',
@@ -70,7 +70,7 @@ export default function VideoContainer({ isStreaming, videoRef, canvasRef, statu
 
       {!isStreaming && (
         <button
-          onClick={startCamera}
+          onClick={onLaunch}
           className="launch-button"
         >
           LAUNCH STREAM

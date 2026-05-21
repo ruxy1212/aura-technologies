@@ -17,6 +17,10 @@ export default function RppgDemo() {
   const accumulatorRef = useRef(null);
 
   const [isStreaming, setIsStreaming] = useState(false);
+  const [wsToken, setWsToken] = useState('');
+  const [tokenDraft, setTokenDraft] = useState('');
+  const [showTokenPrompt, setShowTokenPrompt] = useState(false);
+  const [streamError, setStreamError] = useState('');
 
   // Each feature group in its own state slice — granular updates, no full re-render
   const [status,     setStatus]     = useState({ faceDetected: false, buffer: '0/150', motion_artifact: false });
@@ -36,8 +40,36 @@ export default function RppgDemo() {
   const [upperBreathSnap, setUpperBreathSnap] = useState([]);
   const [lowerBreathSnap, setLowerBreathSnap] = useState([]);
 
+  const stopPipeline = useCallback(() => {
+    clearTimeout(loopRef.current);
+    cancelAnimationFrame(loopRef.current);
+    if (wsRef.current) wsRef.current.close();
+    if (videoRef.current?.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+    }
+    setIsStreaming(false);
+    setStatus({ faceDetected: false, buffer: '0/150', motion_artifact: false });
+    setPulseRate({ bpm: null, snr: null, confidence: 0, waveform: [] });
+    setHrv({ rmssd: null, sdnn: null, confidence: 0 });
+    setBreathing({ brpm: null, confidence: 0, upper_waveform: [], lower_waveform: [] });
+    setExpression({ label: 'neutral', confidence: 0, scores: {} });
+    setBlink({ count: 0, ear: null });
+    setTalking(false);
+    waveformHistory.current    = [];
+    upperBreathHistory.current = [];
+    lowerBreathHistory.current = [];
+    setWaveformSnap([]);
+    setUpperBreathSnap([]);
+    setLowerBreathSnap([]);
+  }, []);
+
   const handleMessage = useCallback((event) => {
     const d = JSON.parse(event.data);
+    if (d?.error) {
+      setStreamError(typeof d.error === 'string' ? d.error : 'Stream error.');
+      stopPipeline();
+      return;
+    }
 
     if (d.pulse_rate) {
       if (typeof d.pulse_rate.bpm === 'number') {
@@ -84,24 +116,26 @@ export default function RppgDemo() {
     loopRef.current = setTimeout(() => requestAnimationFrame(captureAndSendFrame), 1000 / 30);
   }, []);
 
-  const initWebSocket = useCallback(() => {
-    // const ws = new WebSocket('ws://127.0.0.1:8007/ws/stream'); //for local
-    const ws = new WebSocket('wss://aura-backend-py.onrender.com/ws/stream');
+  const initWebSocket = useCallback((token) => {
+    const baseUrl = 'wss://aura-backend-py.onrender.com/ws/stream';
+    const wsUrl = `${baseUrl}?token=${encodeURIComponent(token)}`;
+    // const wsUrl = `ws://127.0.0.1:8007/ws/stream?token=${encodeURIComponent(token)}`; // for local
+    const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
-    ws.onopen = () => { console.log('it is open');
+    ws.onopen = () => {
       setIsStreaming(true);
     };
 
     ws.onmessage = handleMessage;
 
-    ws.onclose = () => { console.log('it is closing');
+    ws.onclose = () => {
       setIsStreaming(false);
       clearTimeout(loopRef.current);
     };
   }, [handleMessage]);
 
-  const startCamera = async () => {
+  const startCamera = useCallback(async (token) => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -121,34 +155,35 @@ export default function RppgDemo() {
           loopRef.current = requestAnimationFrame(captureAndSendFrame);
         };
       }
-      initWebSocket();
+      initWebSocket(token);
     } catch (err) {
       console.error('Camera error:', err);
     }
-  };
+  }, [captureAndSendFrame, initWebSocket]);
 
-  const stopPipeline = useCallback(() => {
-    clearTimeout(loopRef.current);
-    cancelAnimationFrame(loopRef.current);
-    if (wsRef.current) wsRef.current.close();
-    if (videoRef.current?.srcObject) {
-      videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+  const handleLaunch = useCallback(() => {
+    if (!wsToken.trim()) {
+      setTokenDraft('');
+      setShowTokenPrompt(true);
+      return;
     }
-    setIsStreaming(false);
-    setStatus({ faceDetected: false, buffer: '0/150', motion_artifact: false });
-    setPulseRate({ bpm: null, snr: null, confidence: 0, waveform: [] });
-    setHrv({ rmssd: null, sdnn: null, confidence: 0 });
-    setBreathing({ brpm: null, confidence: 0, upper_waveform: [], lower_waveform: [] });
-    setExpression({ label: 'neutral', confidence: 0, scores: {} });
-    setBlink({ count: 0, ear: null });
-    setTalking(false);
-    waveformHistory.current    = [];
-    upperBreathHistory.current = [];
-    lowerBreathHistory.current = [];
-    setWaveformSnap([]);
-    setUpperBreathSnap([]);
-    setLowerBreathSnap([]);
-  }, []);
+    setStreamError('');
+    startCamera(wsToken.trim());
+  }, [startCamera, wsToken]);
+
+  const handleConfirmToken = useCallback(() => {
+    const nextToken = tokenDraft.trim();
+    if (!nextToken) return;
+    setWsToken(nextToken);
+    setShowTokenPrompt(false);
+    setStreamError('');
+    startCamera(nextToken);
+  }, [startCamera, tokenDraft]);
+
+  const handleRefresh = useCallback(() => {
+    setStreamError('');
+    stopPipeline();
+  }, [stopPipeline]);
 
   useEffect(() => () => stopPipeline(), []);
 
@@ -237,7 +272,40 @@ export default function RppgDemo() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'sticky', top: '8px' }}>
 
             {/* Video */}
-            <VideoContainer isStreaming={isStreaming} videoRef={videoRef} canvasRef={canvasRef} status={status} talking={talking} startCamera={startCamera} stopPipeline={stopPipeline} />
+            {streamError && (
+              <Panel title="Stream Error" badge="ATTENTION" style={{ borderColor: '#742a2a' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <p style={{ fontSize: '11px', color: '#fc8181' }}>{streamError}</p>
+                  <button
+                    onClick={handleRefresh}
+                    style={{
+                      alignSelf: 'flex-start',
+                      padding: '6px 12px',
+                      fontSize: '10px',
+                      letterSpacing: '0.12em',
+                      fontFamily: "'DM Mono', monospace",
+                      color: '#fc8181',
+                      border: '1px solid #742a2a',
+                      borderRadius: '4px',
+                      background: 'transparent',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    REFRESH
+                  </button>
+                </div>
+              </Panel>
+            )}
+
+            <VideoContainer
+              isStreaming={isStreaming}
+              videoRef={videoRef}
+              canvasRef={canvasRef}
+              status={status}
+              talking={talking}
+              onLaunch={handleLaunch}
+              stopPipeline={stopPipeline}
+            />
 
             {/* BPM log */}
             <Panel title="Heart Rate Measurement Log" badge={`${logs.length} entries`} style={{ height: '220px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -376,6 +444,103 @@ export default function RppgDemo() {
           </div>
         </div>
       </div>
+
+      {showTokenPrompt && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(7, 13, 20, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000,
+        }}>
+          <div style={{
+            width: '420px',
+            background: '#0f1923',
+            border: '1px solid #1e2d3d',
+            borderRadius: '8px',
+            padding: '20px',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.35)',
+            fontFamily: "'DM Mono', monospace",
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '12px',
+            }}>
+              <span style={{ fontSize: '10px', letterSpacing: '0.18em', color: '#a0aec0' }}>
+                ENTER STREAM TOKEN
+              </span>
+              <button
+                onClick={() => setShowTokenPrompt(false)}
+                style={{
+                  border: '1px solid #1e2d3d',
+                  color: '#a0aec0',
+                  background: 'transparent',
+                  borderRadius: '4px',
+                  fontSize: '10px',
+                  padding: '2px 6px',
+                  cursor: 'pointer',
+                }}
+              >
+                CLOSE
+              </button>
+            </div>
+            <input
+              type="text"
+              value={tokenDraft}
+              onChange={(e) => setTokenDraft(e.target.value)}
+              placeholder="Paste token here"
+              autoFocus
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                borderRadius: '6px',
+                border: '1px solid #1e2d3d',
+                background: '#070d14',
+                color: '#e2e8f0',
+                fontSize: '12px',
+                outline: 'none',
+                marginBottom: '12px',
+              }}
+            />
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setShowTokenPrompt(false)}
+                style={{
+                  padding: '8px 12px',
+                  fontSize: '10px',
+                  letterSpacing: '0.12em',
+                  borderRadius: '6px',
+                  border: '1px solid #1e2d3d',
+                  background: 'transparent',
+                  color: '#a0aec0',
+                  cursor: 'pointer',
+                }}
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={handleConfirmToken}
+                style={{
+                  padding: '8px 14px',
+                  fontSize: '10px',
+                  letterSpacing: '0.12em',
+                  borderRadius: '6px',
+                  border: '1px solid #1e4d78',
+                  background: '#1e4d78',
+                  color: '#e2e8f0',
+                  cursor: 'pointer',
+                }}
+              >
+                CONNECT
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

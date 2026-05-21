@@ -17,8 +17,8 @@ export default function CuGauge({ remaining, total }) {
     pct > 0.2 ? 'var(--amber)'  : 'var(--red)';
 
   const glowColor =
-    pct > 0.5 ? 'rgba(0,255,140,0.4)' :
-    pct > 0.2 ? 'rgba(245,166,35,0.4)' : 'rgba(255,77,77,0.4)';
+    pct > 0.5 ? 'rgba(200,150,58,0.4)' :
+    pct > 0.2 ? 'rgba(236,201,75,0.4)' : 'rgba(252,129,129,0.4)';
 
   return (
     <div className={styles.root}>

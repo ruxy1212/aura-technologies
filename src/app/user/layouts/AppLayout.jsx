@@ -2,7 +2,6 @@ import styles from './AppLayout.module.css';
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'DASHBOARD',  symbol: '◈' },
-  { id: 'docs',      label: 'API DOCS',   symbol: '≡' },
 ];
 
 export default function AppLayout({ page, onNavigate, onLogout, user, children }) {

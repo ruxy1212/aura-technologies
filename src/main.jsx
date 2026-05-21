@@ -3,7 +3,13 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
 import RppgDemo from './app/demo'
-import Layout from './app/user'
+import UserDashboard from './app/user'
+import UserAuth from './app/user/Auth'
+import WebsiteLayout from './app/website/layouts/WebsiteLayout'
+import Landing from './app/website/Landing'
+import Docs from './app/website/Docs'
+import Terms from './app/website/Terms'
+import Privacy from './app/website/Privacy'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +17,22 @@ const router = createBrowserRouter([
     element: <RppgDemo />,
   },
   {
+    path: "/auth",
+    element: <UserAuth />,
+  },
+  {
+    path: "/dashboard",
+    element: <UserDashboard />,
+  },
+  {
     path: "/",
-    element: <Layout />,
+    element: <WebsiteLayout />,
+    children: [
+      { index: true, element: <Landing /> },
+      { path: "docs", element: <Docs /> },
+      { path: "terms", element: <Terms /> },
+      { path: "privacy", element: <Privacy /> },
+    ],
   },
 ]);
 

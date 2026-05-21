@@ -1,41 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@600;700;800&display=swap');
 
 :root {
   /* Core palette */
-  --bg-void:        #080c0c;
-  --bg-surface:     #0d1414;
-  --bg-elevated:    #111c1c;
-  --bg-panel:       #162020;
+  --bg-void:        #070d14;
+  --bg-surface:     #0f1923;
+  --bg-elevated:    #101b27;
+  --bg-panel:       #0c1620;
 
-  /* Grid / borders */
-  --border-dim:     rgba(0, 255, 140, 0.07);
-  --border-mid:     rgba(0, 255, 140, 0.15);
-  --border-bright:  rgba(0, 255, 140, 0.30);
+  /* Borders */
+  --border-dim:     rgba(30, 45, 61, 0.45);
+  --border-mid:     rgba(30, 45, 61, 0.75);
+  --border-bright:  rgba(30, 45, 61, 1);
 
-  /* Signal green — the one vivid colour */
-  --signal:         #00ff8c;
-  --signal-dim:     rgba(0, 255, 140, 0.55);
-  --signal-faint:   rgba(0, 255, 140, 0.12);
-  --signal-glow:    0 0 12px rgba(0, 255, 140, 0.35);
+  /* Primary accent */
+  --signal:         #c8963a;
+  --signal-dim:     rgba(200, 150, 58, 0.6);
+  --signal-faint:   rgba(200, 150, 58, 0.15);
+  --signal-glow:    0 0 12px rgba(200, 150, 58, 0.35);
 
-  /* Amber — warnings / secondary data */
-  --amber:          #f5a623;
-  --amber-dim:      rgba(245, 166, 35, 0.55);
-  --amber-faint:    rgba(245, 166, 35, 0.10);
+  /* Secondary accent */
+  --amber:          #ecc94b;
+  --amber-dim:      rgba(236, 201, 75, 0.65);
+  --amber-faint:    rgba(236, 201, 75, 0.12);
 
   /* Red — errors / critical */
-  --red:            #ff4d4d;
-  --red-faint:      rgba(255, 77, 77, 0.10);
+  --red:            #fc8181;
+  --red-faint:      rgba(252, 129, 129, 0.12);
 
   /* Text */
-  --text-primary:   #d4ede6;
-  --text-secondary: #7aad99;
-  --text-dim:       #3d6b5a;
-  --text-mono:      #00ff8c;
+  --text-primary:   #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-dim:       #4a5568;
+  --text-mono:      #c8963a;
 
   /* Typography */
-  --font-mono:  'IBM Plex Mono', 'Courier New', monospace;
-  --font-sans:  'IBM Plex Sans', sans-serif;
+  --font-mono:  'DM Mono', 'Courier New', monospace;
+  --font-sans:  'DM Mono', 'Courier New', monospace;
 
   /* Spacing */
   --r-sm:  4px;
@@ -56,16 +56,11 @@ html, body, #root {
 body {
   background: var(--bg-void);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-
-  /* Oscilloscope grid background */
-  background-image:
-    linear-gradient(var(--border-dim) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: none;
 }
 
 /* Utility */

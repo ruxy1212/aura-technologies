@@ -1,31 +1,23 @@
-import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import AppLayout from './layouts/AppLayout';
-import LoginPage from './pages/Login';
 import DashboardPage from './pages/Dashboard';
-import DocsPage from './pages/Docs';
 import './index.css'
 
 export default function App() {
-  const { user, loading, login, logout, refresh } = useAuth();
-  const [page, setPage] = useState('dashboard');
+  const { user, loading, logout, refresh } = useAuth();
 
   if (loading) {
     return <Splash />;
   }
 
   if (!user) {
-    return <LoginPage onLogin={login} />;
+    return <Navigate to="/auth" replace />;
   }
 
   return (
-    <AppLayout page={page} onNavigate={setPage} onLogout={logout} user={user}>
-      {page === 'dashboard' && (
-        <DashboardPage user={user} onRefresh={refresh} />
-      )}
-      {page === 'docs' && (
-        <DocsPage />
-      )}
+    <AppLayout page="dashboard" onNavigate={() => {}} onLogout={logout} user={user}>
+      <DashboardPage user={user} onRefresh={refresh} />
     </AppLayout>
   );
 }
