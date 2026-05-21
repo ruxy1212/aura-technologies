@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './DocsPage.module.css';
+import styles from './Docs.module.css';
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 function Section({ id, title, children }) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { requestMagicLink, verifyMagicLink } from '../api/client';
-import EcgLine from '../assets/EcgLine';
-import styles from './LoginPage.module.css';
+import { requestMagicLink, verifyMagicLink } from '../../../api/client';
+import EcgLine from '../components/EcgLine';
+import styles from './Login.module.css';
 
 const STEPS = { EMAIL: 'email', REGISTER: 'register', SENT: 'sent', VERIFY: 'verify' };
 

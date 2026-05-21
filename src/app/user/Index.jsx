@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
-import AppLayout from './AppLayout';
-import LoginPage from './LoginPage';
-import DashboardPage from './Dashboard';
-import DocsPage from './DocsPage';
-import '../App.css'
+import { useAuth } from '../../hooks/useAuth';
+import AppLayout from './layouts/AppLayout';
+import LoginPage from './pages/Login';
+import DashboardPage from './pages/Dashboard';
+import DocsPage from './pages/Docs';
+import './index.css'
 
-export default function Layout() {
+export default function App() {
   const { user, loading, login, logout, refresh } = useAuth();
   const [page, setPage] = useState('dashboard');
 

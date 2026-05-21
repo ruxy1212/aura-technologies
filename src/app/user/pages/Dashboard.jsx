@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { rotateKey } from '../api/client';
-import CuGauge from './CuGauge';
+import { rotateKey } from '../../../api/client';
+import CuGauge from '../components/CuGauge';
 import styles from './Dashboard.module.css';
 
 const FEATURE_WEIGHTS = [

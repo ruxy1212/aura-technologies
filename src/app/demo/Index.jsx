@@ -9,7 +9,7 @@ import ConfBar from "./_fragments/ConfBar";
 import ExpressionPanel from "./_fragments/ExpressionPanel";
 
 // ─── Main dashboard ───────────────────────────────────────────────────────────
-export default function RppgDashboard() {
+export default function RppgDemo() {
   const videoRef  = useRef(null);
   const canvasRef = useRef(null);
   const wsRef     = useRef(null);

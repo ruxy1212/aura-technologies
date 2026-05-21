@@ -1,14 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
-import RppgDashboard from '../not_in_use/RppgDashboard.jsx'
-import Layout from './app/Layout.jsx'
+import './main.css'
+import RppgDemo from './app/demo'
+import Layout from './app/user'
 
 const router = createBrowserRouter([
   {
-    path: "/rppg", // <-- Add this new route object,
-    element: <RppgDashboard />,
+    path: "/demo", // <-- Add this new route object,
+    element: <RppgDemo />,
   },
   {
     path: "/",
