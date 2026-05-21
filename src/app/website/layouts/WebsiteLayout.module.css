@@ -10,7 +10,7 @@
   --site-amber-ghost: rgba(30, 77, 120, 0.15);
   --site-text: #e2e8f0;
   --site-text-dim: #a0aec0;
-  --site-text-muted: #4a5568;
+  --site-text-muted: #8493a8;
   --site-blue: #63b3ed;
   --site-green: #48bb78;
   --site-red: #fc8181;
@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .shell::before {

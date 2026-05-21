@@ -32,26 +32,28 @@ function Endpoint({ method, path, description, children }) {
 
 function ParamTable({ rows }) {
   return (
-    <table className={styles.paramTable}>
-      <thead>
-        <tr>
-          <th>FIELD</th>
-          <th>TYPE</th>
-          <th>REQ</th>
-          <th>DESCRIPTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map(([field, type, req, desc]) => (
-          <tr key={field}>
-            <td><code>{field}</code></td>
-            <td><span className={styles.typeTag}>{type}</span></td>
-            <td>{req ? <span className={styles.req}>●</span> : <span className={styles.opt}>○</span>}</td>
-            <td>{desc}</td>
+    <div className={styles.tableWrapper}>
+      <table className={styles.paramTable}>
+        <thead>
+          <tr>
+            <th>FIELD</th>
+            <th>TYPE</th>
+            <th>REQ</th>
+            <th>DESCRIPTION</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map(([field, type, req, desc]) => (
+            <tr key={field}>
+              <td><code>{field}</code></td>
+              <td><span className={styles.typeTag}>{type}</span></td>
+              <td>{req ? <span className={styles.req}>●</span> : <span className={styles.opt}>○</span>}</td>
+              <td>{desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -134,7 +136,7 @@ export default function DocsPage() {
         {/* ── Overview ── */}
         <Section id="overview" title="OVERVIEW">
           <p className={styles.prose}>
-            The rPPG API streams biometric telemetry derived from standard webcam video
+            The AuRa Telemetry (rPPG) API streams biometric telemetry derived from standard webcam video
             via remote photoplethysmography. Connect over WebSocket, send JPEG frames,
             receive real-time vitals. REST endpoints handle auth and account management.
           </p>
@@ -175,7 +177,7 @@ export default function DocsPage() {
               ['use_case', 'string', false, 'How you plan to use the API'],
             ]} />
             <CodeBlock lang="bash">{`
-curl -X POST https://your-api.onrender.com/auth/magic-link \\
+curl -X POST https://{BASE_URL}/auth/magic-link \\
   -H "Content-Type: application/json" \\
   -d '{"email":"you@company.com","company":"Acme","use_case":"Patient monitoring"}'
             `}</CodeBlock>
@@ -195,7 +197,7 @@ curl -X POST https://your-api.onrender.com/auth/magic-link \\
               Tokens expire after 15 minutes.
             </p>
             <CodeBlock lang="bash">{`
-curl "https://your-api.onrender.com/auth/verify?token=YOUR_TOKEN"
+curl "https://{BASE_URL}/auth/verify?token=YOUR_TOKEN"
             `}</CodeBlock>
             <ResponseBlock label="200 OK">
               <CodeBlock lang="json">{`
@@ -216,7 +218,7 @@ curl "https://your-api.onrender.com/auth/verify?token=YOUR_TOKEN"
 
           <Endpoint id="me" method="GET" path="/me" description="Fetch profile and CU balance">
             <CodeBlock lang="bash">{`
-curl https://your-api.onrender.com/me \\
+curl https://{BASE_URL}/me \\
   -H "Authorization: Bearer aurppg_Kx9m..."
             `}</CodeBlock>
             <ResponseBlock label="200 OK">
@@ -241,7 +243,7 @@ curl https://your-api.onrender.com/me \\
               Immediately invalidates the old key and returns a new one.
             </p>
             <CodeBlock lang="bash">{`
-curl -X POST https://your-api.onrender.com/me/rotate-key \\
+curl -X POST https://{BASE_URL}/me/rotate-key \\
   -H "Authorization: Bearer aurppg_Kx9m..."
             `}</CodeBlock>
             <ResponseBlock label="200 OK">
@@ -260,7 +262,7 @@ curl -X POST https://your-api.onrender.com/me/rotate-key \\
 
           <div className={styles.wsUrl}>
             <span className={styles.dimLabel}>ENDPOINT</span>
-            <code>wss://your-api.onrender.com/ws/stream?api_key=aurppg_Kx9m...</code>
+            <code>{`wss://{BASE_URL}/ws/stream?api_key=aurppg_Kx9m...`}</code>
           </div>
 
           <Endpoint id="ws-handshake" method="WS" path="First message → server" description="Session handshake">
