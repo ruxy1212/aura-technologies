@@ -36,7 +36,7 @@ export default function WebsiteLayout() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `font-label-caps text-label-caps transition-all duration-300 active:scale-95 ${isActive ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'}`
+                `transition-all duration-300 active:scale-95 ${isActive ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'}`
               }
               end={item.to === '/'}
             >
@@ -79,13 +79,12 @@ export default function WebsiteLayout() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerBrand}>
-            <span>AURA rPPG · Remote Photoplethysmography Infrastructure</span>
-            <span>© 2026 Aura Labs. All rights reserved.</span>
+            <span className="text-primary-fixed">© 2026 Aura Technologies. All rights reserved.</span>
           </div>
           <div className={styles.footerLinks}>
             <NavLink to="/terms">Terms</NavLink>
             <NavLink to="/privacy">Privacy</NavLink>
-            <a href="mailto:support@aurappg.com">Contact</a>
+            <a href="mailto:support@auratechnologies.com">Contact</a>
           </div>
         </div>
       </footer>

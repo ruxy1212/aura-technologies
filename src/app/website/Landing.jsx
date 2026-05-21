@@ -82,64 +82,9 @@ export default function Landing() {
   return (
     <div className={styles.root}>
       <Hero />
-      <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <p className={styles.eyebrow}>AURA TECHNOLOGIES</p>
-          <h1 className={styles.title}>
-            Multimodal Intellisense infrastructure.
-          </h1>
-          <p className={styles.subtitle}>
-            Empower your applications with real-time biometric signals derived from video and voice. Ship responsive wellness and engagement experiences without specialized hardware.
-          </p>
-          <div className={styles.heroActions}>
-            <Link className={styles.primaryCta} to="/demo">LAUNCH LIVE DEMO</Link>
-            <Link className={styles.secondaryCta} to="/auth">REQUEST API KEY</Link>
-          </div>
-          <div className={styles.heroStats}>
-            <div>
-              <span className={styles.statLabel}>LATENCY</span>
-              <span className={styles.statValue}>&lt; 33ms</span>
-            </div>
-            <div>
-              <span className={styles.statLabel}>ACCURACY</span>
-              <span className={styles.statValue}>±2 BPM</span>
-            </div>
-            <div>
-              <span className={styles.statLabel}>STREAM</span>
-              <span className={styles.statValue}>30 FPS</span>
-            </div>
-          </div>
-        </div>
-        <div className={styles.heroPanel}>
-          <div className={styles.panelHeader}>
-            <span>LIVE SIGNAL PREVIEW</span>
-            <span className={styles.panelDot} />
-          </div>
-          <div className={styles.panelBody}>
-            <div className={styles.panelMetric}>
-              <span>HEART RATE</span>
-              <strong>78 BPM</strong>
-            </div>
-            <div className={styles.panelMetric}>
-              <span>BREATHING</span>
-              <strong>14 BRPM</strong>
-            </div>
-            <div className={styles.panelMetric}>
-              <span>EXPRESSION</span>
-              <strong>CALM</strong>
-            </div>
-            <div className={styles.panelWave}>
-              <div />
-              <div />
-              <div />
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>PRODUCTS</p>
+          <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">PRODUCTS</p>
           <h2 className={styles.sectionTitle}>Two engines. Infinite possibilities.</h2>
         </div>
         <div className={styles.productsGrid}>
@@ -159,7 +104,7 @@ export default function Landing() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>TELEMETRY FEATURES</p>
+          <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">TELEMETRY FEATURES</p>
           <h2 className={styles.sectionTitle}>Signals you can build on.</h2>
         </div>
         <div className={styles.featureGrid}>
@@ -177,7 +122,7 @@ export default function Landing() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>PLATFORMS</p>
+          <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">PLATFORMS</p>
           <h2 className={styles.sectionTitle}>Integrate anywhere.</h2>
         </div>
         <div className={styles.sdkGrid}>
@@ -197,7 +142,7 @@ export default function Landing() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>PRICING</p>
+          <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">PRICING</p>
           <h2 className={styles.sectionTitle}>Choose a plan that scales with your deployment.</h2>
         </div>
         <div className={styles.pricingGrid}>
@@ -214,7 +159,7 @@ export default function Landing() {
                 ))}
               </ul>
               {plan.isAvailable ? (
-                <Link className={styles.priceCta} to="/auth">GET STARTED</Link>
+                <Link className="font-label-caps text-label-caps bg-primary text-on-primary px-8 py-3 rounded-md rounded-DEFAULT hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_20px_rgba(0,229,255,0.2)] w-full sm:w-auto" to="/auth">GET STARTED</Link>
               ) : (
                 <button className={styles.priceCta} disabled>COMING SOON</button>
               )}
@@ -226,24 +171,27 @@ export default function Landing() {
       <section className={styles.ctaSection}>
         <div className={styles.ctaCard}>
           <div>
-            <p className={styles.eyebrow}>CONTACT</p>
+            <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">CONTACT</p>
             <h2 className={styles.sectionTitle}>Ready for a custom deployment?</h2>
             <p className={styles.ctaSubtitle}>
               Tell us about your product and we will map the right pipeline, pricing, and rollout plan.
             </p>
           </div>
           <div className={styles.ctaActions}>
-            <a className={styles.primaryCta} href="mailto:support@aurappg.com">
-              CONTACT SALES
+            <a href="mailto:support@auratechnologies.com" className="font-data-mono text-data-mono border border-outline-variant/50 text-on-surface px-8 py-4 rounded-DEFAULT hover:border-primary/50 hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface/50 backdrop-blur-sm relative group overflow-hidden active:scale-95 w-full sm:w-auto">
+              <span className="relative z-10">CONTACT SALES</span>
+              <div className="absolute inset-0 bg-primary/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </a>
-            <Link className={styles.secondaryCta} to="/demo">SEE LIVE DEMO</Link>
+            <Link to="/demo" className="font-label-caps text-label-caps bg-primary text-on-primary px-8 py-4 rounded-DEFAULT hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_20px_rgba(0,229,255,0.2)] w-full sm:w-auto">
+              SEE LIVE DEMO
+            </Link>
           </div>
         </div>
       </section>
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <p className={styles.eyebrow}>FAQ</p>
+          <p className="text-primary-fixed uppercase text-[10px] tracking-[0.3em]">FAQ</p>
           <h2 className={styles.sectionTitle}>Questions, answered.</h2>
         </div>
         <div className={styles.faqGrid}>

@@ -219,7 +219,7 @@
 }
 
 .footerLinks a:hover {
-  color: var(--site-text);
+  color: #c3f5ff;
 }
 
 @media (max-width: 960px) {
@@ -256,6 +256,10 @@
 
   .mobileNav {
     display: flex;
+  }
+
+  .footer {
+    margin-bottom: 60px;
   }
 
   .footerInner {
