@@ -29,6 +29,11 @@ export const verifyMagicLink = (token) =>
 
 // Profile
 export const fetchProfile = () => request('/me');
+export const updateProfile = (company, use_case) => 
+  request('/me', {
+    method: 'PATCH',
+    body: JSON.stringify({ company, use_case }),
+  });
 
 // Rotate key
 export const rotateKey = () => request('/me/rotate-key', { method: 'POST' });

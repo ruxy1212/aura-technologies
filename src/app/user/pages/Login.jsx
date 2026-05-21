@@ -1,33 +1,72 @@
 import { useState, useEffect } from 'react';
-import { requestMagicLink, verifyMagicLink } from '../../../api/client';
+import { requestMagicLink, verifyMagicLink, fetchProfile, updateProfile } from '../../../api/client';
 import EcgLine from '../components/EcgLine';
 import styles from './Login.module.css';
 
-const STEPS = { EMAIL: 'email', REGISTER: 'register', SENT: 'sent', VERIFY: 'verify' };
+const STEPS = { EMAIL: 'email', SENT: 'sent', VERIFYING: 'verifying', COMPANY_INFO: 'company_info' };
 
 export default function LoginPage({ onLogin }) {
   const [step, setStep]         = useState(STEPS.EMAIL);
   const [email, setEmail]       = useState('');
   const [company, setCompany]   = useState('');
   const [useCase, setUseCase]   = useState('');
-  const [token, setToken]       = useState('');
   const [error, setError]       = useState('');
   const [busy, setBusy]         = useState(false);
+  const [tempApiKey, setTempApiKey] = useState('');
+
+  // Resend logic
+  const [resendDisabled, setResendDisabled] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
 
   // Handle ?token= in URL (magic link click)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const t = params.get('token');
-    if (t) { setToken(t); setStep(STEPS.VERIFY); }
+    if (t) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+      handleVerification(t);
+    }
   }, []);
+
+  useEffect(() => {
+    let interval;
+    if (resendDisabled && resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer(prev => prev - 1);
+      }, 1000);
+    } else if (resendTimer === 0) {
+      setResendDisabled(false);
+    }
+    return () => clearInterval(interval);
+  }, [resendDisabled, resendTimer]);
+
+  async function handleVerification(token) {
+    setStep(STEPS.VERIFYING);
+    try {
+      const { api_key } = await verifyMagicLink(token);
+      localStorage.setItem('api_key', api_key);
+      const profile = await fetchProfile();
+      
+      if (profile.company && profile.use_case) {
+        onLogin(api_key);
+      } else {
+        setTempApiKey(api_key);
+        setStep(STEPS.COMPANY_INFO);
+      }
+    } catch (err) {
+      setError(err.message || 'Verification failed. Token may be invalid or expired.');
+      setStep(STEPS.EMAIL);
+    }
+  }
 
   async function handleEmailSubmit(e) {
     e.preventDefault();
     setError('');
     setBusy(true);
     try {
-      await requestMagicLink(email, company || undefined, useCase || undefined);
+      await requestMagicLink(email, undefined, undefined);
       setStep(STEPS.SENT);
+      startResendTimer();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -35,18 +74,39 @@ export default function LoginPage({ onLogin }) {
     }
   }
 
-  async function handleVerify(e) {
-    e.preventDefault();
+  async function handleResend() {
     setError('');
     setBusy(true);
     try {
-      const { api_key } = await verifyMagicLink(token);
-      onLogin(api_key);
+      await requestMagicLink(email, undefined, undefined);
+      startResendTimer();
     } catch (err) {
       setError(err.message);
     } finally {
       setBusy(false);
     }
+  }
+
+  function startResendTimer() {
+    setResendDisabled(true);
+    setResendTimer(60);
+  }
+
+  async function handleCompanySubmit(e) {
+    if (e) e.preventDefault();
+    setBusy(true);
+    try {
+      await updateProfile(company || undefined, useCase || undefined);
+      onLogin(tempApiKey);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function skipCompanyInfo() {
+    onLogin(tempApiKey);
   }
 
   return (
@@ -80,7 +140,7 @@ export default function LoginPage({ onLogin }) {
             <EcgLine width={380} height={56} />
             <EcgLine width={380} height={56} color="rgba(0,229,255,0.35)" />
           </div>
-          <ul className={styles.statList}>
+          <ul className={`${styles.statList} hidden md:flex`}>
             {[
               ['PLATFORM', 'REST & WebSockets'],
               ['TELEMETRY', 'Live Now'],
@@ -106,10 +166,7 @@ export default function LoginPage({ onLogin }) {
           </div>
 
           {step === STEPS.EMAIL && (
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              setStep(STEPS.REGISTER);
-            }} className={styles.form}>
+            <form onSubmit={handleEmailSubmit} className={styles.form}>
               <label className={styles.label}>EMAIL ADDRESS</label>
               <input
                 className={styles.input}
@@ -120,20 +177,28 @@ export default function LoginPage({ onLogin }) {
                 required
                 autoFocus
               />
-              <button className={styles.btn} type="submit">
-                CONTINUE →
+              {error && <p className={styles.error}>{error}</p>}
+              <button className={styles.btn} type="submit" disabled={busy}>
+                {busy ? 'SENDING...' : 'CONTINUE →'}
               </button>
             </form>
           )}
 
-          {step === STEPS.REGISTER && (
-            <form onSubmit={handleEmailSubmit} className={styles.form}>
+          {step === STEPS.VERIFYING && (
+            <div className={styles.form}>
+              <p className={styles.subtext}>Authenticating your session...</p>
+              {error && <p className={styles.error}>{error}</p>}
+            </div>
+          )}
+
+          {step === STEPS.COMPANY_INFO && (
+            <form onSubmit={handleCompanySubmit} className={styles.form}>
               <p className={styles.subtext}>
                 First time? A few details help us calibrate your experience.
                 <button
                   type="button"
                   className={styles.skipLink}
-                  onClick={handleEmailSubmit}
+                  onClick={skipCompanyInfo}
                   disabled={busy}
                 >
                   Skip
@@ -146,6 +211,7 @@ export default function LoginPage({ onLogin }) {
                 value={company}
                 onChange={e => setCompany(e.target.value)}
                 placeholder="Acme Health Inc."
+                autoFocus
               />
               <label className={styles.label}>USE CASE</label>
               <input
@@ -157,7 +223,7 @@ export default function LoginPage({ onLogin }) {
               />
               {error && <p className={styles.error}>{error}</p>}
               <button className={styles.btn} type="submit" disabled={busy}>
-                {busy ? 'SENDING...' : 'SEND MAGIC LINK →'}
+                {busy ? 'SAVING...' : 'SAVE & CONTINUE →'}
               </button>
             </form>
           )}
@@ -173,40 +239,14 @@ export default function LoginPage({ onLogin }) {
                 Check your inbox. The link expires in 15 minutes.
               </p>
               <div className={styles.divider} />
-              <p className={styles.subtext}>Have a token already?</p>
               <button
                 className={styles.btnGhost}
-                onClick={() => setStep(STEPS.VERIFY)}
+                onClick={handleResend}
+                disabled={resendDisabled || busy}
               >
-                ENTER TOKEN MANUALLY
+                {resendDisabled ? `RESEND LINK (${resendTimer}s)` : 'RESEND LINK'}
               </button>
             </div>
-          )}
-
-          {step === STEPS.VERIFY && (
-            <form onSubmit={handleVerify} className={styles.form}>
-              <label className={styles.label}>VERIFICATION TOKEN</label>
-              <input
-                className={styles.input}
-                type="text"
-                value={token}
-                onChange={e => setToken(e.target.value)}
-                placeholder="paste token here"
-                required
-                autoFocus
-              />
-              {error && <p className={styles.error}>{error}</p>}
-              <button className={styles.btn} type="submit" disabled={busy}>
-                {busy ? 'VERIFYING...' : 'VERIFY & ENTER →'}
-              </button>
-              <button
-                type="button"
-                className={styles.btnGhost}
-                onClick={() => { setStep(STEPS.EMAIL); setError(''); }}
-              >
-                ← BACK
-              </button>
-            </form>
           )}
         </div>
 
@@ -214,6 +254,18 @@ export default function LoginPage({ onLogin }) {
           No passwords. No OAuth. Just a link.
         </p>
       </div>
+      <ul className={`${styles.statList} pb-14 flex md:hidden`}>
+        {[
+          ['PLATFORM', 'REST & WebSockets'],
+          ['TELEMETRY', 'Live Now'],
+          ['SENTIENCE', 'Coming Soon'],
+        ].map(([label, val]) => (
+          <li key={label} className={styles.statItem}>
+            <span className={styles.statLabel}>{label}</span>
+            <span className={styles.statValue}>{val}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

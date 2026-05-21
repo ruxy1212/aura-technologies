@@ -245,6 +245,27 @@ export default function RppgDemo() {
         @keyframes pulse {
           0%,100% { opacity: 1; } 50% { opacity: 0.45; }
         }
+        .demo-container {
+          display: grid;
+          grid-template-columns: 640px 1fr;
+          gap: 16px;
+          align-items: start;
+        }
+        .left-column {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          position: sticky;
+          top: 8px;
+        }
+        @media (max-width: 1024px) {
+          .demo-container {
+            grid-template-columns: 1fr;
+          }
+          .left-column {
+            position: static;
+          }
+        }
       `}</style>
 
       <div style={{
@@ -259,15 +280,10 @@ export default function RppgDemo() {
         <Header isStreaming={isStreaming} />
 
         {/* Main 2-column layout */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '640px 1fr',
-          gap: '16px',
-          alignItems: 'start',
-        }}>
+        <div className="demo-container">
 
           {/* ── Left col: video + log ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', position: 'sticky', top: '8px' }}>
+          <div className="left-column">
 
             {/* Video */}
             {streamError && (
@@ -306,14 +322,16 @@ export default function RppgDemo() {
             />
 
             {/* BPM log */}
-            <Panel title="Heart Rate Measurement Log" badge={`${logs.length} entries`} style={{ height: '220px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ overflowY: 'auto', flex: 1 }}>
-                {logs.length === 0
-                  ? <span style={{ fontSize: '10px', color: '#2d3748' }}>Awaiting signal lock…</span>
-                  : logs.map((l, i) => <LogRow key={i} time={l.time} bpm={l.bpm} />)
-                }
-              </div>
-            </Panel>
+            <div className="hidden lg:block">
+              <Panel title="Heart Rate Measurement Log" badge={`${logs.length} entries`} style={{ height: '220px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ overflowY: 'auto', flex: 1 }}>
+                  {logs.length === 0
+                    ? <span style={{ fontSize: '10px', color: '#2d3748' }}>Awaiting signal lock…</span>
+                    : logs.map((l, i) => <LogRow key={i} time={l.time} bpm={l.bpm} />)
+                  }
+                </div>
+              </Panel>
+            </div>
           </div>
 
           {/* ── Right col: metric panels ── */}

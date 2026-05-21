@@ -1,21 +1,19 @@
 export default function VideoContainer({ isStreaming, videoRef, canvasRef, status, talking, onLaunch, stopPipeline }) {
   return (
     <div className="scan-overlay" style={{
-      position: 'sticky',
-      width: '640px',
-      height: '480px',
+      position: 'relative',
+      width: '100%',
+      aspectRatio: '4 / 3',
       background: '#0a1520',
       borderRadius: '10px',
       overflow: 'hidden',
       border: '1px solid #1e2d3d',
       flexShrink: 0,
-      top: '8px',
     }}>
       <video
         ref={videoRef}
         autoPlay playsInline muted
-        width="640" height="480"
-        style={{ display: 'block', transform: 'scaleX(-1)' }}
+        style={{ display: 'block', transform: 'scaleX(-1)', width: '100%', height: '100%', objectFit: 'cover' }}
       />
       <canvas ref={canvasRef} width="640" height="480" style={{ display: 'none' }} />
 
