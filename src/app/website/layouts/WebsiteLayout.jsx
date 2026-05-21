@@ -4,8 +4,6 @@ import styles from './WebsiteLayout.module.css';
 const NAV_ITEMS = [
   { to: '/', label: 'HOME' },
   { to: '/docs', label: 'DOCS' },
-  { to: '/terms', label: 'TERMS' },
-  { to: '/privacy', label: 'PRIVACY' },
 ];
 
 export default function WebsiteLayout() {
@@ -30,7 +28,6 @@ export default function WebsiteLayout() {
               </g>
             </svg>
           </span>
-          <span className={styles.brandText}>AURA rPPG</span>
         </NavLink>
 
         <nav className={styles.navLinks}>
@@ -49,14 +46,31 @@ export default function WebsiteLayout() {
         </nav>
 
         <div className={styles.navActions}>
-          <a className={styles.navGhost} href="mailto:support@aurappg.com">
-            CONTACT
-          </a>
           <NavLink className={styles.navCta} to="/auth">
-            GET API KEY
+            Account
           </NavLink>
         </div>
       </header>
+
+      <nav className={styles.mobileNav}>
+        <div className={styles.mobileNavGlass}>
+          {NAV_ITEMS.map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `${styles.mobileNavLink} ${isActive ? styles.mobileNavActive : ''}`
+              }
+              end={item.to === '/'}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+          <NavLink className={styles.mobileNavCta} to="/auth">
+            Account
+          </NavLink>
+        </div>
+      </nav>
 
       <main className={styles.main}>
         <Outlet />
@@ -64,8 +78,15 @@ export default function WebsiteLayout() {
 
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span>AURA rPPG · Remote Photoplethysmography Infrastructure</span>
-          <span>© 2026 Aura Labs. All rights reserved.</span>
+          <div className={styles.footerBrand}>
+            <span>AURA rPPG · Remote Photoplethysmography Infrastructure</span>
+            <span>© 2026 Aura Labs. All rights reserved.</span>
+          </div>
+          <div className={styles.footerLinks}>
+            <NavLink to="/terms">Terms</NavLink>
+            <NavLink to="/privacy">Privacy</NavLink>
+            <a href="mailto:support@aurappg.com">Contact</a>
+          </div>
         </div>
       </footer>
     </div>

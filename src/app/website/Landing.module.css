@@ -253,6 +253,38 @@
   font-size: 10px;
 }
 
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ctaCard {
+  border-radius: 18px;
+  border: 1px solid rgba(99, 179, 237, 0.25);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 24px;
+  align-items: center;
+  background: linear-gradient(140deg, rgba(15, 25, 35, 0.9), rgba(30, 77, 120, 0.25));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.ctaSubtitle {
+  font-size: 13px;
+  color: var(--site-text-dim);
+  line-height: 1.7;
+  max-width: 540px;
+}
+
+.ctaActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
 .faqGrid {
   display: grid;
   gap: 14px;
@@ -279,27 +311,6 @@
   line-height: 1.7;
 }
 
-.contactCallout {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(30, 77, 120, 0.35);
-  background: rgba(30, 77, 120, 0.12);
-  font-size: 12px;
-}
-
-.contactCallout a {
-  text-decoration: none;
-  color: var(--site-amber);
-  letter-spacing: 0.18em;
-  font-size: 10px;
-}
-
 @keyframes pulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
@@ -312,6 +323,14 @@
 
   .heroPanel {
     order: -1;
+  }
+
+  .ctaCard {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaActions {
+    justify-content: flex-start;
   }
 }
 

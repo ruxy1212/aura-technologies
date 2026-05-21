@@ -154,6 +154,24 @@ export default function Landing() {
         </div>
       </section>
 
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaCard}>
+          <div>
+            <p className={styles.eyebrow}>CONTACT</p>
+            <h2 className={styles.sectionTitle}>Ready for a custom deployment?</h2>
+            <p className={styles.ctaSubtitle}>
+              Tell us about your product and we will map the right rPPG pipeline, pricing, and rollout plan.
+            </p>
+          </div>
+          <div className={styles.ctaActions}>
+            <a className={styles.primaryCta} href="mailto:support@aurappg.com">
+              CONTACT SALES
+            </a>
+            <Link className={styles.secondaryCta} to="/demo">SEE LIVE DEMO</Link>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <p className={styles.eyebrow}>FAQ</p>
@@ -166,10 +184,6 @@ export default function Landing() {
               <p>{item.a}</p>
             </details>
           ))}
-        </div>
-        <div className={styles.contactCallout}>
-          <p>Need something custom? Reach out and we will tailor a plan.</p>
-          <a href="mailto:support@aurappg.com">CONTACT US →</a>
         </div>
       </section>
     </div>
