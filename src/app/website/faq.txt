@@ -1,0 +1,44 @@
+const r = [{
+    q: "What is SmartSpectra and how does it work?",
+    a: ["SmartSpectra is a contactless health-sensing SDK that turns any camera into a real-time biometric sensor. It tracks facial and chest movements to extract anonymized health metrics including pulse rate, breathing rate, HRV, and more — all without wearables or physical contact."]
+}, {
+    q: "What physiological signals can SmartSpectra measure?",
+    a: ["Pulse rate, breathing rate, heart rate variability (HRV), apnea detection, inhale/exhale ratio, upper/lower breath trace, respiratory line length, facial landmarks, blink/talk detection, relative blood pressure changes, emotional responses, and more."]
+}, {
+    q: "How accurate is it?",
+    a: ["Clinical trials show less than 1.62% RMSD for heart rate and less than 1.71% RMSD for breathing rate versus hospital-grade equipment. Accuracy depends on lighting conditions and minimal motion during measurement. We have submitted our clinical trial results to the FDA for approval."]
+}, {
+    q: "Is SmartSpectra FDA-approved?",
+    a: ["SmartSpectra has passed clinical trials demonstrating accuracy comparable to hospital-grade equipment, but is not yet FDA-approved as a medical device. Current intended use is for wellness applications — not for diagnosis, treatment, or medical decision-making."]
+}, {
+    q: "How does Presage protect privacy?",
+    a: ["Privacy is built in by design. The SDK does not access or store any personal data. No facial images or video are stored or transmitted — only anonymized metrics are used. All results are delivered on a purely anonymized basis to your app."]
+}, {
+    q: "Which platforms are supported?",
+    a: ["SmartSpectra supports iOS (Swift), Android (Kotlin), cross-platform C++ on Linux, macOS and Windows. Integration is easy with your favorite package manager. Samples abound on GitHub. Edit and modify your UI experience with all of the popular coding tools."]
+}, {
+    q: "Is there a free tier?",
+    a: ["Yes. The Community Edition is free with no credit card required — 10K virtual sessions/month, all SDK features, and community support via Discord. Perfect for prototyping and non-commercial use.", "And the benefits don't stop there.", "Just $99/month for up to 5k users (up to $99 of AI token usage included for free)."]
+}, {
+    q: "I want the tech but don't have a developer.",
+    a: [e.jsxs("span", {
+        children: ["No developer - No problem. We can host your UI and personalized activities for your users on our ", e.jsx("a", {
+            href: "https://apps.apple.com/us/app/coherence-by-presage-tech/id6758461062",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "text-[#991B1B] underline hover:opacity-80",
+            children: "Coherence by Presage Tech"
+        }), " app. These are easily customizable for your users — no coding required. Contact us at ", e.jsx("a", {
+            href: "mailto:sales@presagetech.com",
+            className: "text-[#991B1B] underline hover:opacity-80",
+            children: "sales@presagetech.com"
+        }), " to get started instantly."]
+    }, "no-dev"), "Ten minutes and you are live with your own vitals enabled experiences, telesessions and guided activities you can then share with your own users. We'll even handle the billing for you."]
+}];
+
+NB: The features supported by Telemetry currently are ``{ key: 'pulse_rate', label: 'Pulse Rate',              cu: '2.0 CU/min' },
+  { key: 'hrv',        label: 'Heart Rate Variability',  cu: '1.0 CU/min' },
+  { key: 'breathing',  label: 'Breathing Rate & Flow',   cu: '2.0 CU/min' },
+  { key: 'expression', label: 'Facial Expression',       cu: '1.0 CU/min' },
+  { key: 'blink',      label: 'Eye Blink Detection',     cu: '0.5 CU/min' },
+  { key: 'talking',    label: 'Talking Detection',       cu: '0.5 CU/min' },``

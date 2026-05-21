@@ -214,7 +214,7 @@ export default function RppgDemo() {
       {/* Google Fonts — DM Mono + Syne */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; }
         body { background: #070d14; }
 
         /* Scanning line overlay on the video */

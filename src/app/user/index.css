@@ -46,7 +46,7 @@
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  /* padding: 0; */
 }
 
 html, body, #root {
@@ -69,8 +69,8 @@ body {
 button {
   font-family: var(--font-mono);
   cursor: pointer;
-  border: none;
-  background: none;
+  /* border: none; */
+  /* background: none; */
 }
 
 input {

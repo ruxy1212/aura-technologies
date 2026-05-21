@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Custom Colors --- */
+  --color-on-tertiary: #243048;
+  --color-on-surface-variant: #bac9cc;
+  --color-on-secondary-container: #007149;
+  --color-tertiary-fixed-dim: #bac6e4;
+  --color-primary-fixed: #9cf0ff;
+  --color-tertiary-container: #c4d0ee;
+  --color-surface-container: #1e2024;
+  --color-on-primary: #00363d;
+  --color-surface-container-high: #282a2e;
+  --color-surface-tint: #00daf3;
+  --color-primary-fixed-dim: #00daf3;
+  --color-on-secondary-fixed-variant: #005234;
+  --color-on-secondary-fixed: #002112;
+  --color-on-tertiary-container: #4d5972;
+  --color-surface-bright: #37393e;
+  --color-inverse-surface: #e2e2e8;
+  --color-surface: #111318;
+  --color-outline-variant: #3b494c;
+  --color-on-error: #690005;
+  --color-on-primary-container: #00626e;
+  --color-secondary-fixed: #4dffb2;
+  --color-on-tertiary-fixed: #001b32;
+  --color-inverse-on-surface: #2f3035;
+  --color-surface-container-highest: #333539;
+  --color-primary-container: #00e5ff;
+  --color-surface-container-low: #1a1c20;
+  --color-on-background: #e2e2e8;
+  --color-secondary-fixed-dim: #00e297;
+  --color-on-error-container: #ffdad6;
+  --color-background: #111318;
+  --color-inverse-primary: #006875;
+  --color-on-surface: #e2e2e8;
+  --color-outline: #849396;
+  --color-tertiary: #e6ecff;
+  --color-secondary: #f4fff5;
+  --color-on-secondary: #003822;
+  --color-on-primary-fixed-variant: #004f58;
+  --color-error-container: #93000a;
+  --color-tertiary-fixed: #d7e2ff;
+  --color-error: #ffb4ab;
+  --color-surface-dim: #111318;
+  --color-surface-variant: #333539;
+  --color-secondary-container: #00ffab;
+  --color-surface-container-lowest: #0c0e12;
+  --color-on-primary-fixed: #001f24;
+  --color-primary: #c3f5ff;
+  --color-on-tertiary-fixed-variant: #3b475f;
+
+  /* --- Border Radius (Extending/Overriding Defaults) --- */
+  --radius-default: 0.125rem; /* Targets 'radius' or 'rounded' */
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;     /* Note: This overrides utility `rounded-full` to 12px instead of 9999px */
+
+  /* --- Custom Spacing --- */
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1440px;
+  --spacing-unit: 4px;
+  --spacing-desktop-margin: 64px; /* Renamed slightly for cleaner auto-generation */
+
+  /* --- Font Families --- */
+  --font-headline-lg-mobile: "Sora", sans-serif;
+  --font-data-mono: "JetBrains Mono", monospace;
+  --font-body-md: "Hanken Grotesk", sans-serif;
+  --font-label-caps: "JetBrains Mono", monospace;
+  --font-headline-lg: "Sora", sans-serif;
+  --font-display-lg: "Sora", sans-serif;
+
+  /* --- Custom Font Sizes with Line Heights, tracking, and weights --- */
+  --text-headline-lg-mobile: 32px;
+  --text-headline-lg-mobile--line-height: 1.2;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-data-mono: 14px;
+  --text-data-mono--line-height: 1.4;
+  --text-data-mono--letter-spacing: 0.05em;
+  --text-data-mono--font-weight: 500;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--letter-spacing: 0.01em;
+  --text-body-md--font-weight: 400;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 1;
+  --text-label-caps--letter-spacing: 0.15em;
+  --text-label-caps--font-weight: 600;
+
+  --text-headline-lg: 40px;
+  --text-headline-lg--line-height: 1.2;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-display-lg: 64px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+}
+
+
+.glass-panel {
+    background: rgba(18, 21, 28, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid;
+    border-image-source: linear-gradient(180deg, #303645 0%, #1E232E 100%);
+    border-image-slice: 1;
+}
+.glow-shadow {
+    box-shadow: 0 0 20px rgba(0, 218, 243, 0.15);
+}
+.text-gradient {
+    background: linear-gradient(90deg, #c3f5ff 0%, #00daf3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+@keyframes pulse-opacity {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+.animate-live-dot {
+    animation: pulse-opacity 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+.animate-scan {
+    animation: scanline 3s linear infinite;
+}
+
+.bottom-nav-glass {
+    background: rgba(17, 19, 24, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(59, 73, 76, 0.3);
+}

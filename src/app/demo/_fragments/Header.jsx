@@ -31,11 +31,11 @@ export default function Header({ isStreaming }) {
             color: '#e2e8f0',
             letterSpacing: '-0.02em',
           }}>
-            rPPG Telemetry
+            Telemetry
           </h1>
         </div>
         <p style={{ fontSize: '10px', color: '#4a5568', letterSpacing: '0.1em', marginTop: '2px' }}>
-          REMOTE PHOTOPLETHYSMOGRAPHY · LIVE SESSION
+          REMOTE PHOTOPLETHYSMOGRAPHY · MULTIMODAL INTELLISENSE
         </p>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
