@@ -36,7 +36,7 @@ export default function WebsiteLayout() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.navActive : ''}`
+                `font-label-caps text-label-caps transition-all duration-300 active:scale-95 ${isActive ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'}`
               }
               end={item.to === '/'}
             >
@@ -46,7 +46,7 @@ export default function WebsiteLayout() {
         </nav>
 
         <div className={styles.navActions}>
-          <NavLink className={styles.navCta} to="/auth">
+          <NavLink className="font-label-caps text-label-caps bg-primary text-on-primary px-6 py-2 rounded-DEFAULT active:scale-95 transition-transform hover:bg-primary-fixed duration-300 hidden md:block" to="/auth">
             Get API Key
           </NavLink>
         </div>

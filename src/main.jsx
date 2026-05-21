@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './tailwind.css'
 import './main.css'
 import RppgDemo from './app/demo'
 import UserDashboard from './app/user'

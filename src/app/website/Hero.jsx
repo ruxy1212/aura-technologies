@@ -1,17 +1,17 @@
 import { ArrowRight } from 'lucide-react';
-import './hero.css'
 import { HeartPulse } from 'lucide-react';
 import { Video } from 'lucide-react';
 import { Rocket } from 'lucide-react';
 import { Key } from 'lucide-react';
 import { CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
     <section>
       <section className="mobile-hero relative min-h-[90vh] flex flex-col items-center justify-start md:hidden px-margin-mobile pt-8 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-[-1] opacity-40 mix-blend-luminosity">
-          <img alt="Hero Background" className="w-full h-[60vh] object-cover object-top mask-image-b [mask-image:linear-gradient(to bottom, black 30%, transparent 100%)] [-webkit-mask-image:linear-gradient(to bottom, black 30%, transparent 100%)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBvv7orFSaQn9SJXgAVqzR7LClJEvB9fozMdMntUkR1OKVzRMqVlp5giwrZ_hWd9X2nVIzJT9rO1uZ5e53Ij4cIVoCJwIAvPHStefRYPNNh7N7FkznQQNpNxFCv7DraKHwhS06ppBmnq6T9Nrhd0XYt4hYmm22x5gig4wGjFlBAgrQZ3517ir1tCU7aBg9nwSifzCl9F_-SSQiArQroMF9Id5Ds4t1Cp_tORConZj0ZYjPggsLPf74K5RR-7RWfrX1xgQT_Cc1wpo" />
+          <img alt="Hero Background" className="w-full h-[60vh] object-cover object-top mask-image-b [mask-image:linear-gradient(to bottom, black 30%, transparent 100%)] [-webkit-mask-image:linear-gradient(to bottom, black 30%, transparent 100%)]" src="/hero.webp" />
         </div>
         <div className="w-full flex flex-col gap-6 relative z-10 mt-8">
           <div className="flex flex-col gap-4 text-center">
@@ -27,14 +27,14 @@ export default function Hero() {
             </p>
           </div>
           <div className="flex flex-col gap-3 w-full mt-4">
-            <button className="w-full bg-primary text-[#000000] font-data-mono text-data-mono py-4 rounded font-bold hover:bg-primary-fixed transition-colors active:scale-[0.98] flex items-center justify-center gap-2 ambient-glow">
+            <Link to="/demo" className="w-full bg-primary text-[#000000] font-data-mono text-data-mono py-4 rounded font-bold hover:bg-primary-fixed transition-colors active:scale-[0.98] flex items-center justify-center gap-2 ambient-glow">
               Launch Live Demo
               <Rocket size={18} className="text-current" />
-            </button>
-            <button className="w-full bg-transparent border border-outline-variant text-on-surface font-data-mono text-data-mono py-4 rounded hover:bg-surface-container-high hover:border-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+            </Link>
+            <Link to="/auth" className="w-full bg-transparent border border-outline-variant text-on-surface font-data-mono text-data-mono py-4 rounded hover:bg-surface-container-high hover:border-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2">
               Request API Key
               <Key size={18} className="text-current" />
-            </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-unit w-full mt-8">
             <div className="glass-panel p-4 rounded-lg flex flex-col gap-2 relative overflow-hidden group">
@@ -87,30 +87,27 @@ export default function Hero() {
       <section className="desktop-hero hidden relative min-h-[90vh] items-center pt-8 md:pt-16 pb-16 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto md:flex">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-gutter w-full relative z-10 items-center text-center lg:text-left">
           <div className="lg:col-span-6 flex flex-col items-center lg:items-start gap-6 md:gap-8 z-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10">
-              <span className="w-2 h-2 rounded-full bg-secondary-fixed animate-live-dot"></span>
-              <span className="font-data-mono text-data-mono text-primary">v2.0 Beta Live</span>
-            </div>
+            <span className="font-data-mono text-data-mono text-primary tracking-[0.5em]">AURA TECHNOLOGIES</span>
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface max-w-[15ch] mx-auto lg:mx-0">
               Multimodal Intellisense <span className="text-gradient">infrastructure.</span>
             </h1>
-            <p className="font-body-md text-body-md text-on-surface-variant max-w-[500px] mx-auto lg:mx-0">
+            <p className="text-body-md text-on-surface-variant max-w-[500px] mx-auto lg:mx-0">
               Empower your applications with real-time biometric signals derived from video and voice. Ship responsive wellness and engagement experiences without specialized hardware.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2 md:mt-4">
-              <button className="font-label-caps text-label-caps bg-primary text-on-primary px-8 py-4 rounded-DEFAULT hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_20px_rgba(0,229,255,0.2)] w-full sm:w-auto">
+              <Link to="/demo" className="font-label-caps text-label-caps bg-primary text-on-primary px-8 py-4 rounded-DEFAULT hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 active:scale-95 shadow-[0_0_20px_rgba(0,229,255,0.2)] w-full sm:w-auto">
                 Launch Live Demo
                 <ArrowRight size={18} className="" />
-              </button>
-              <button className="font-data-mono text-data-mono border border-outline-variant/50 text-on-surface px-8 py-4 rounded-DEFAULT hover:border-primary/50 hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface/50 backdrop-blur-sm relative group overflow-hidden active:scale-95 w-full sm:w-auto">
+              </Link>
+              <Link to="/auth" className="font-data-mono text-data-mono border border-outline-variant/50 text-on-surface px-8 py-4 rounded-DEFAULT hover:border-primary/50 hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface/50 backdrop-blur-sm relative group overflow-hidden active:scale-95 w-full sm:w-auto">
                 <span className="relative z-10">Request API Key</span>
                 <div className="absolute inset-0 bg-primary/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              </button>
+              </Link>
             </div>
           </div>
           <div className="lg:col-span-6 relative mt-8 lg:mt-0 z-10 w-full aspect-4/5 sm:aspect-[4/3] lg:aspect-square flex items-center justify-center">
             <div className="absolute inset-0 rounded-xl overflow-hidden border border-outline-variant/20 shadow-[0_0_40px_rgba(0,218,243,0.05)]">
-              <img alt="Cinematic rendering of a glowing, neural-network-like structure suspended in a dark, high-tech server room setting. The central object features interlocking, dark geometric shapes emitting bright cyan and soft green light along intricate, root-like tendrils. In the background, out-of-focus server racks with glowing blue indicators suggest a vast data center. Ethereal, flowing waveforms in neon blue and pale green overlay the scene, labeled with 'Heart rate', 'Breathing', and 'Voice' in a clean, modern sans-serif font, floating above a reflective glass surface." className="w-full h-full object-cover opacity-80 mix-blend-lighten" src="https://lh3.googleusercontent.com/aida/ADBb0ugMzkgTDxSSkNwo4sOV8ojYJTO1eblwuB4wsBl_ca0mAGUqDdYzM-vU_UyNuhTe7fuZFAPTVa9-RULZ7Qo3zPx2ZtyAkfLUuM3v3ZK7xDD7zRHo8zcrDQfb_6hCviFQT5N80cR_VPuJaDYGmDi3IS8ynl0nPCDYWBN1vAEizeJqhYtjaiDvYf0NFI_SXheF79PtdH2kzIam6EuO_xEd_9UPbJEO3Qol04fRkyc1s6HJZRwe4TyiH6rDMCQ" />
+              <img alt="AuRa Technologies" className="w-full h-full object-cover opacity-80 mix-blend-lighten" src="/hero.webp" />
               <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent"></div>
               <div className="absolute inset-0 bg-linear-to-b from-transparent via-primary/10 to-transparent h-32 w-full animate-scan pointer-events-none"></div>
             </div>

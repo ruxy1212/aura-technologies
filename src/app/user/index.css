@@ -78,10 +78,10 @@ input {
 }
 
 a {
-  color: var(--signal);
+  /* color: var(--signal); */
   text-decoration: none;
 }
 
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
