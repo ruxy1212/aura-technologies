@@ -72,7 +72,7 @@
   letter-spacing: 0.10em;
   color: var(--signal);
   background: var(--signal-faint);
-  border: 1px solid rgba(200, 150, 58, 0.25);
+  border: 1px solid rgba(30, 77, 120, 0.25);
   border-radius: var(--r-sm);
   padding: 2px 7px;
 }
@@ -194,7 +194,7 @@
 
 .rotateBtn:hover:not(:disabled) {
   background: var(--amber-faint);
-  box-shadow: 0 0 10px rgba(245, 166, 35, 0.25);
+  box-shadow: 0 0 10px rgba(30, 77, 120, 0.25);
 }
 
 .rotateBtn:disabled {
@@ -207,7 +207,7 @@
   font-size: 11px;
   color: var(--signal);
   background: var(--signal-faint);
-  border: 1px solid rgba(200, 150, 58, 0.25);
+  border: 1px solid rgba(30, 77, 120, 0.25);
   border-radius: var(--r-sm);
   padding: 8px 12px;
 }

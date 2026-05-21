@@ -7,6 +7,7 @@ import MetricCell from "./_fragments/MetricCell";
 import Sparkline from "./_fragments/Sparkline";
 import ConfBar from "./_fragments/ConfBar";
 import ExpressionPanel from "./_fragments/ExpressionPanel";
+import { wsStream } from "../../api/client";
 
 // ─── Main dashboard ───────────────────────────────────────────────────────────
 export default function RppgDemo() {
@@ -117,10 +118,7 @@ export default function RppgDemo() {
   }, []);
 
   const initWebSocket = useCallback((token) => {
-    const baseUrl = 'wss://aura-backend-py.onrender.com/ws/stream';
-    const wsUrl = `${baseUrl}?token=${encodeURIComponent(token)}`;
-    // const wsUrl = `ws://127.0.0.1:8007/ws/stream?token=${encodeURIComponent(token)}`; // for local
-    const ws = new WebSocket(wsUrl);
+    const ws = wsStream(token);
     wsRef.current = ws;
 
     ws.onopen = () => {

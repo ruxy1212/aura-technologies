@@ -91,7 +91,7 @@
   font-family: var(--site-font-mono);
   font-size: 11px;
   color: var(--site-amber);
-  background: rgba(200, 150, 58, 0.12);
+  background: rgba(30, 77, 120, 0.12);
   padding: 1px 5px;
   border-radius: 3px;
 }
@@ -170,15 +170,15 @@
 }
 
 .get {
-  background: rgba(200, 150, 58, 0.12);
+  background: rgba(30, 77, 120, 0.12);
   color: var(--site-amber);
-  border: 1px solid rgba(200, 150, 58, 0.35);
+  border: 1px solid rgba(30, 77, 120, 0.35);
 }
 
 .post {
-  background: rgba(236, 201, 75, 0.12);
+  background: rgba(30, 77, 120, 0.12);
   color: var(--site-amber);
-  border: 1px solid rgba(236, 201, 75, 0.35);
+  border: 1px solid rgba(30, 77, 120, 0.35);
 }
 
 .ws {
@@ -237,7 +237,7 @@
 
 .paramTable td code {
   color: var(--site-amber);
-  background: rgba(200, 150, 58, 0.12);
+  background: rgba(30, 77, 120, 0.12);
   padding: 1px 5px;
   border-radius: 3px;
 }

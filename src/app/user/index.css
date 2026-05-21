@@ -13,15 +13,15 @@
   --border-bright:  rgba(30, 45, 61, 1);
 
   /* Primary accent */
-  --signal:         #c8963a;
-  --signal-dim:     rgba(200, 150, 58, 0.6);
-  --signal-faint:   rgba(200, 150, 58, 0.15);
-  --signal-glow:    0 0 12px rgba(200, 150, 58, 0.35);
+  --signal:         #1e4d78;
+  --signal-dim:     rgba(30, 77, 120, 0.6);
+  --signal-faint:   rgba(30, 77, 120, 0.15);
+  --signal-glow:    0 0 12px rgba(30, 77, 120, 0.35);
 
   /* Secondary accent */
-  --amber:          #ecc94b;
-  --amber-dim:      rgba(236, 201, 75, 0.65);
-  --amber-faint:    rgba(236, 201, 75, 0.12);
+  --amber:          #1e4d78;
+  --amber-dim:      rgba(30, 77, 120, 0.65);
+  --amber-faint:    rgba(30, 77, 120, 0.12);
 
   /* Red — errors / critical */
   --red:            #fc8181;
@@ -31,7 +31,7 @@
   --text-primary:   #e2e8f0;
   --text-secondary: #a0aec0;
   --text-dim:       #4a5568;
-  --text-mono:      #c8963a;
+  --text-mono:      #1e4d78;
 
   /* Typography */
   --font-mono:  'DM Mono', 'Courier New', monospace;

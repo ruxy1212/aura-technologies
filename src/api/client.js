@@ -32,3 +32,11 @@ export const fetchProfile = () => request('/me');
 
 // Rotate key
 export const rotateKey = () => request('/me/rotate-key', { method: 'POST' });
+
+// Websocket
+export const wsStream = (token) => {
+  const baseUrl = import.meta.env.VITE_API_WS_URL ?? 'ws://127.0.0.1:8007';
+    const wsUrl = `${baseUrl}/ws/stream?token=${encodeURIComponent(token)}`;
+    // const wsUrl = `ws://127.0.0.1:8007/ws/stream?token=${encodeURIComponent(token)}`; // for local
+    return new WebSocket(wsUrl);
+}
