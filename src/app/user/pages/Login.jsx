@@ -55,21 +55,36 @@ export default function LoginPage({ onLogin }) {
       <div className={styles.brand}>
         <div className={styles.brandInner}>
           <div className={styles.logoMark}>
-            <span className={styles.logoSymbol}>♥</span>
-            <span className={styles.logoText}>rPPG</span>
+            <span className={styles.logoText}>
+              <svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg" height="40">
+                <defs>
+                  <linearGradient id="auraWebGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: '#00D4FF', stopOpacity: '1' }} />
+                    <stop offset="100%" style={{ stopColor: '#FFFFFF', stopOpacity: '1' }} />
+                  </linearGradient>
+                </defs>
+                <g fill="none" stroke="url(#auraWebGradient)" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 55 L35 15 L50 55 M28 42 L42 42" />
+                  <path d="M50 55 Q55 55 58 50 L58 30 M58 30 L58 45 Q58 55 68 55 Q78 55 78 45 L78 30" />
+                  <path d="M78 55 L88 55 L88 30 M88 30 L88 42 L100 42 Q112 42 112 30 Q112 18 100 18 L88 18 M100 42 L115 55" />
+                  <path d="M115 55 C130 55 135 55 145 55 L155 55 L165 10 L185 70 L200 35 L215 55 L225 55" />
+                  <path d="M168 45 L190 45" strokeWidth="4.5" />
+                </g>
+              </svg>
+            </span>
           </div>
           <p className={styles.tagline}>
-            Remote photoplethysmography<br />telemetry infrastructure
+            Contactless health-sensing SDK and<br />voice-based intellisense infrastructure
           </p>
           <div className={styles.ecgWrapper}>
             <EcgLine width={380} height={56} />
-            <EcgLine width={380} height={56} color="rgba(200,150,58,0.35)" />
+            <EcgLine width={380} height={56} color="rgba(0,229,255,0.35)" />
           </div>
           <ul className={styles.statList}>
             {[
-              ['LATENCY',  '< 33 ms'],
-              ['ACCURACY', '±2 BPM'],
-              ['FEATURES', '6'],
+              ['PLATFORM', 'REST & WebSockets'],
+              ['TELEMETRY', 'Live Now'],
+              ['SENTIENCE', 'Coming Soon'],
             ].map(([label, val]) => (
               <li key={label} className={styles.statItem}>
                 <span className={styles.statLabel}>{label}</span>
@@ -87,7 +102,7 @@ export default function LoginPage({ onLogin }) {
             <span className={styles.dot} />
             <span className={styles.dot} style={{ opacity: 0.5 }} />
             <span className={styles.dot} style={{ opacity: 0.25 }} />
-            <span className={styles.cardTitle}>TERMINAL</span>
+            <span className={styles.cardTitle}>AURA TERMINAL</span>
           </div>
 
           {step === STEPS.EMAIL && (
