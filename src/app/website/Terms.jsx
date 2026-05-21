@@ -4,87 +4,121 @@ export default function Terms() {
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <p className={styles.subtitle}>AURA rPPG</p>
+        <p className={styles.subtitle}>AURA TECHNOLOGIES</p>
         <h1 className={styles.title}>Terms of Service</h1>
         <p className={styles.subtitle}>Last updated: May 21, 2026</p>
       </header>
 
       <section className={styles.section}>
-        <h2>OVERVIEW</h2>
+        <h2>1. OVERVIEW AND ACCEPTANCE OF TERMS</h2>
         <p>
-          Aura rPPG provides software that analyzes camera frames to produce wellness
-          and engagement signals. The service is for informational purposes only and
-          does not diagnose, treat, prevent, or cure any medical condition.
+          These Terms of Service ("Terms") govern your use of the APIs, WebSockets, SDKs, and associated software 
+          provided by Aura Technologies ("we," "us," or "our"), including but not limited to the <strong>AuRa Telemetry</strong> 
+          and <strong>AuRa Sentience</strong> engines (collectively, the "Service"). By accessing or using the Service, 
+          you agree to be bound by these Terms on behalf of yourself or the entity you represent. If you do not agree 
+          with these Terms, you may not use the Service.
+        </p>
+        <p>
+          AuRa Telemetry provides remote photoplethysmography (rPPG) and multimodal intellisense capabilities that 
+          extract real-time biometric and physiological signals from camera video frames. AuRa Sentience provides 
+          voice-based intellisense intended to interpret vocal signals for the analysis of cognitive states. 
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>ELIGIBILITY</h2>
+        <h2>2. NOT A MEDICAL DEVICE</h2>
         <p>
-          You must be at least 18 years old and have authority to accept these terms
-          on behalf of your organization. By using the service, you confirm you meet
-          these requirements.
+          <strong>DISCLAIMER:</strong> The Service is not an FDA-approved medical device, nor is it intended to diagnose, 
+          treat, cure, or prevent any disease or medical condition. The physiological and cognitive signals derived 
+          (such as pulse rate, HRV, breathing rate, stress, or depression indicators) are strictly for informational, 
+          wellness, research, and non-diagnostic purposes. You are solely responsible for ensuring that your application 
+          or integration does not mislead users into believing that the Service provides medical advice or clinical diagnosis.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>ACCOUNTS & API KEYS</h2>
+        <h2>3. ACCOUNT REGISTRATION AND SECURITY</h2>
+        <p>
+          To access the Service, you must register via our magic-link authentication system. You are responsible for 
+          maintaining the confidentiality of your magic links and your generated API keys. You agree to:
+        </p>
         <ul>
-          <li>Keep your API keys confidential and rotate them if compromised.</li>
-          <li>You are responsible for all usage that occurs under your credentials.</li>
-          <li>We may suspend access if we detect abuse or security risks.</li>
+          <li>Provide accurate, current, and complete information during registration.</li>
+          <li>Keep your API keys confidential and securely rotate them periodically or if compromised.</li>
+          <li>Take full responsibility for all activities and Compute Units (CU) usage that occur under your account.</li>
+          <li>Promptly notify us of any unauthorized use or suspected security breach of your account.</li>
         </ul>
       </section>
 
       <section className={styles.section}>
-        <h2>ACCEPTABLE USE</h2>
+        <h2>4. USAGE, FEES, AND COMPUTE UNITS (CU)</h2>
+        <p>
+          The Service operates on a usage-based billing model measured in Compute Units (CU). Features are charged at a 
+          specific CU rate per minute. Free tiers are granted a strictly limited monthly balance that resets periodically. 
+          Aura Technologies reserves the right to modify CU pricing, change tier limits, or transition features from free 
+          to paid at our sole discretion upon reasonable notice. Overage or usage beyond free tiers will require an upgraded 
+          subscription plan. We reserve the right to automatically terminate data streams or suspend your account if your 
+          CU balance is exhausted or your account falls into arrears.
+        </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2>5. ACCEPTABLE USE AND RESTRICTIONS</h2>
+        <p>You agree not to use the Service in any manner that is unlawful or harms us, our users, or others. Specifically, you shall not:</p>
         <ul>
-          <li>Use the service only for lawful purposes and in compliance with applicable laws.</li>
-          <li>Do not reverse engineer, scrape, or attempt to disrupt the service.</li>
-          <li>Do not upload unlawful, harmful, or misleading content.</li>
+          <li>Use the Service in any way that violates applicable privacy laws, including the unauthorized collection of biometric data without informed consent.</li>
+          <li>Reverse engineer, decompile, disassemble, or attempt to derive the source code or proprietary models of AuRa Telemetry or AuRa Sentience.</li>
+          <li>Resell, frame, sub-license, or otherwise unlawfully distribute the Service as a standalone API.</li>
+          <li>Interfere with or disrupt the integrity, security, or performance of the Service infrastructure.</li>
+          <li>Use the Service to make automated decisions that materially impact individuals' legal rights, employment, or medical care.</li>
         </ul>
       </section>
 
       <section className={styles.section}>
-        <h2>INTELLECTUAL PROPERTY</h2>
+        <h2>6. INTELLECTUAL PROPERTY</h2>
         <p>
-          The Aura rPPG software, documentation, and branding are owned by Aura Labs.
-          You may not copy, modify, or distribute any portion of the service without
-          written permission.
+          All rights, title, and interest in and to the Service, including all models, algorithms, algorithms, APIs, SDKs, 
+          and documentation, are and will remain the exclusive property of Aura Technologies and its licensors. These Terms 
+          do not grant you any right to use the Aura Technologies trademarks, logos, or brand features without our prior 
+          written consent.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>DISCLAIMERS</h2>
+        <h2>7. WARRANTIES AND DISCLAIMERS</h2>
         <p>
-          The service is provided on an "as is" and "as available" basis. We make no
-          warranties regarding accuracy, reliability, or fitness for a particular
-          purpose. Use the service at your own risk.
+          THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. 
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, AURA TECHNOLOGIES EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING, 
+          BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND 
+          ACCURACY OF THE BIOMETRIC OR COGNITIVE DATA PRODUCED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, 
+          SECURE, OR ERROR-FREE.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>LIMITATION OF LIABILITY</h2>
+        <h2>8. LIMITATION OF LIABILITY</h2>
         <p>
-          To the maximum extent permitted by law, Aura Labs is not liable for any
-          indirect, incidental, or consequential damages arising from your use of the
-          service or inability to access it.
+          TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT WILL AURA TECHNOLOGIES OR ITS AFFILIATES BE LIABLE FOR ANY 
+          INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR MULTIPLE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, 
+          WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING 
+          FROM YOUR ACCESS TO OR USE OF THE SERVICE, EVEN IF AURA TECHNOLOGIES HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>CHANGES</h2>
+        <h2>9. MODIFICATIONS TO TERMS</h2>
         <p>
-          We may update these terms periodically. Continued use of the service after
-          updates means you accept the revised terms.
+          Aura Technologies reserves the right to modify these Terms at any time. We will post the most current version of 
+          these Terms on this page with the "Last updated" date. By continuing to access or use the Service after revisions 
+          become effective, you agree to be bound by the revised Terms.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2>CONTACT</h2>
+        <h2>10. CONTACT</h2>
         <div className={styles.contact}>
-          <span>Questions about these terms?</span>
-          <a href="mailto:support@aurappg.com">support@aurappg.com</a>
+          <span>If you have any questions about these Terms, please contact us at:</span>
+          <a href="mailto:support@auratechnologies.com">support@auratechnologies.com</a>
         </div>
       </section>
     </div>
