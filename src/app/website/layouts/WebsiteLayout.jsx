@@ -47,7 +47,7 @@ export default function WebsiteLayout() {
 
         <div className={styles.navActions}>
           <NavLink className={styles.navCta} to="/auth">
-            Account
+            Get API Key
           </NavLink>
         </div>
       </header>
@@ -67,7 +67,7 @@ export default function WebsiteLayout() {
             </NavLink>
           ))}
           <NavLink className={styles.mobileNavCta} to="/auth">
-            Account
+            Get API Key
           </NavLink>
         </div>
       </nav>
