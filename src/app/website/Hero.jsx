@@ -15,7 +15,7 @@ export default function Hero() {
         </div>
         <div className="w-full flex flex-col gap-6 relative z-10 mt-8">
           <div className="flex flex-col gap-4 text-center">
-            <div className="infinite-progress absolute top-[-32px] left-0"></div>
+            <div className="infinite-progress absolute top-8 left-0"></div>
             <div className="inline-flex items-center justify-center gap-2 mb-2">
               <span className="font-label-caps text-label-caps text-primary-fixed uppercase text-[10px] tracking-[0.3em]">AURA TECHNOLOGIES</span>
             </div>
@@ -91,7 +91,7 @@ export default function Hero() {
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface max-w-[15ch] mx-auto lg:mx-0">
               Multimodal Intellisense <span className="text-gradient">infrastructure.</span>
             </h1>
-            <p className="text-body-md text-on-surface-variant max-w-[500px] mx-auto lg:mx-0">
+            <p className="text-body-md text-on-surface-variant max-w-125 mx-auto lg:mx-0">
               Empower your applications with real-time biometric signals derived from video and voice. Ship responsive wellness and engagement experiences without specialized hardware.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2 md:mt-4">
@@ -105,7 +105,7 @@ export default function Hero() {
               </Link>
             </div>
           </div>
-          <div className="lg:col-span-6 relative mt-8 lg:mt-0 z-10 w-full aspect-4/5 sm:aspect-[4/3] lg:aspect-square flex items-center justify-center">
+          <div className="lg:col-span-6 relative mt-8 lg:mt-0 z-10 w-full aspect-4/5 sm:aspect-4/3 lg:aspect-square flex items-center justify-center">
             <div className="absolute inset-0 rounded-xl overflow-hidden border border-outline-variant/20 shadow-[0_0_40px_rgba(0,218,243,0.05)]">
               <img alt="AuRa Technologies" className="w-full h-full object-cover opacity-80 mix-blend-lighten" src="/hero.webp" />
               <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent"></div>
@@ -118,14 +118,14 @@ export default function Hero() {
                   <span className="font-label-caps text-[10px] sm:text-label-caps text-on-surface-variant uppercase">Latency</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary-fixed shadow-[0_0_8px_rgba(77,255,178,0.8)]"></span>
                 </div>
-                <div className="font-data-mono text-sm sm:text-data-mono text-on-surface text-lg sm:text-xl">
+                <div className="font-data-mono sm:text-data-mono text-on-surface text-lg sm:text-xl">
                   <span className="text-primary">&lt;</span> 33<span className="text-on-surface-variant text-xs sm:text-sm ml-1">ms</span>
                 </div>
               </div>
               <div className="self-start glass-panel rounded-lg p-3 sm:p-5 w-48 sm:w-64 glow-shadow pointer-events-auto transform -translate-y-2 sm:-translate-y-4 hover:scale-[1.02] transition-transform">
                 <div className="flex justify-between items-center mb-2 sm:mb-4 border-b border-white/10 pb-1 sm:pb-2">
                   <span className="font-label-caps text-[10px] sm:text-label-caps text-on-surface-variant uppercase flex items-center gap-1 sm:gap-2">
-                    <HeartPulse size={12} className="sm:size-[14px]" />
+                    <HeartPulse size={12} className="sm:size-3.5" />
                     Signal Stream
                   </span>
                   <span className="text-[8px] sm:text-[10px] text-secondary-fixed animate-pulse">REC</span>
@@ -157,7 +157,7 @@ export default function Hero() {
               </div>
               <div className="self-end glass-panel rounded-lg p-2 sm:p-4 w-40 sm:w-48 glow-shadow pointer-events-auto flex items-center gap-2 sm:gap-4">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-outline-variant/30 flex items-center justify-center bg-surface-container/50 shrink-0">
-                  <Video size={16} className="text-primary sm:size-[20px]" />
+                  <Video size={16} className="text-primary sm:size-5" />
                 </div>
                 <div>
                   <div className="font-label-caps text-[10px] sm:text-label-caps text-on-surface-variant uppercase mb-0.5 sm:mb-1">Stream</div>

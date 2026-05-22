@@ -8,6 +8,8 @@ import Sparkline from "./_fragments/Sparkline";
 import ConfBar from "./_fragments/ConfBar";
 import ExpressionPanel from "./_fragments/ExpressionPanel";
 import { wsStream } from "../../api/client";
+import { pollServer, wakeServer } from "../../api/serverCheck";
+import { Link } from "react-router-dom";
 
 // ─── Main dashboard ───────────────────────────────────────────────────────────
 export default function RppgDemo() {
@@ -42,6 +44,7 @@ export default function RppgDemo() {
   const [lowerBreathSnap, setLowerBreathSnap] = useState([]);
 
   const stopPipeline = useCallback(() => {
+    wakeServer();
     clearTimeout(loopRef.current);
     cancelAnimationFrame(loopRef.current);
     if (wsRef.current) wsRef.current.close();
@@ -159,14 +162,17 @@ export default function RppgDemo() {
     }
   }, [captureAndSendFrame, initWebSocket]);
 
-  const handleLaunch = useCallback(() => {
+  const handleLaunch = useCallback(async () => {
     if (!wsToken.trim()) {
       setTokenDraft('');
       setShowTokenPrompt(true);
       return;
     }
-    setStreamError('');
-    startCamera(wsToken.trim());
+    const serverReady = await pollServer(setStreamError);
+    if (serverReady) {
+      setStreamError('');
+      startCamera(wsToken.trim());
+    }
   }, [startCamera, wsToken]);
 
   const handleConfirmToken = useCallback(() => {
@@ -504,24 +510,26 @@ export default function RppgDemo() {
                 CLOSE
               </button>
             </div>
-            <input
-              type="text"
-              value={tokenDraft}
-              onChange={(e) => setTokenDraft(e.target.value)}
-              placeholder="Paste token here"
-              autoFocus
-              style={{
-                width: '100%',
-                padding: '10px 12px',
-                borderRadius: '6px',
-                border: '1px solid #1e2d3d',
-                background: '#070d14',
-                color: '#e2e8f0',
-                fontSize: '12px',
-                outline: 'none',
-                marginBottom: '12px',
-              }}
-            />
+            <div>
+              <input
+                type="text"
+                value={tokenDraft}
+                onChange={(e) => setTokenDraft(e.target.value)}
+                placeholder="Paste token here"
+                autoFocus
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid #1e2d3d',
+                  background: '#070d14',
+                  color: '#e2e8f0',
+                  fontSize: '12px',
+                  outline: 'none',
+                }}
+              />
+              <Link className="text-[10px] text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-95 mb-3 hover:underline!" to="/dashboard">{"Don't have API key? Click here"}</Link>
+            </div>
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
               <button
                 onClick={() => setShowTokenPrompt(false)}
