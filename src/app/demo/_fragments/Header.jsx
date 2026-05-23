@@ -23,8 +23,8 @@ export default function Header({ isStreaming }) {
               <path d="M168 45 L190 45" strokeWidth="4.5" />
             </g>
           </svg>
-          <div style={{ height: '40px', width: '2px', background: '#fff' }} />
-          <h1 style={{
+          <div className="h-10 w-0.5 bg-white hidden md:block" />
+          <h1 className="hidden md:block" style={{
             fontFamily: "'Syne', sans-serif",
             fontSize: '22px',
             fontWeight: '800',
@@ -35,7 +35,9 @@ export default function Header({ isStreaming }) {
           </h1>
         </div>
         <p style={{ fontSize: '10px', color: '#4a5568', letterSpacing: '0.1em', marginTop: '2px' }}>
-          REMOTE PHOTOPLETHYSMOGRAPHY · MULTIMODAL INTELLISENSE
+          <span className="md:hidden">rPPG</span>
+          <span className="hidden md:inline">REMOTE PHOTOPLETHYSMOGRAPHY</span>
+          · MULTIMODAL INTELLISENSE
         </p>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

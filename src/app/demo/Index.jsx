@@ -67,7 +67,7 @@ export default function RppgDemo() {
     setLowerBreathSnap([]);
   }, []);
 
-  const handleMessage = useCallback((event) => {
+  const handleMessage = useCallback((event) => { console.log('in message', event)
     const d = JSON.parse(event.data);
     if (d?.error) {
       setStreamError(typeof d.error === 'string' ? d.error : 'Stream error.');
@@ -124,13 +124,13 @@ export default function RppgDemo() {
     const ws = wsStream(token);
     wsRef.current = ws;
 
-    ws.onopen = () => {
+    ws.onopen = () => { console.log('in open')
       setIsStreaming(true);
     };
 
     ws.onmessage = handleMessage;
 
-    ws.onclose = () => {
+    ws.onclose = () => { console.log('in close')
       setIsStreaming(false);
       clearTimeout(loopRef.current);
     };
@@ -224,6 +224,10 @@ export default function RppgDemo() {
         body { background: #070d14; }
 
         /* Scanning line overlay on the video */
+        .scan-overlay {
+          position: sticky;
+          top: 8px;
+        }
         .scan-overlay::after {
           content: '';
           position: absolute;
@@ -262,14 +266,26 @@ export default function RppgDemo() {
           flex-direction: column;
           gap: 16px;
           position: sticky;
-          top: 8px;
+          top: 0px;
+        }
+        .left-column::before {
+          content: '';
+          position: absolute;
+          top: -10px;
+          width: 100%;
+          height: 20px;
+          background: #070d14;
         }
         @media (max-width: 1024px) {
           .demo-container {
             grid-template-columns: 1fr;
           }
           .left-column {
-            position: static;
+            top: 8px;
+          }
+          .scan-overlay {
+            position: relative;
+            top: 0px;
           }
         }
       `}</style>
@@ -479,6 +495,7 @@ export default function RppgDemo() {
         }}>
           <div style={{
             width: '420px',
+            maxWidth: '80%',
             background: '#0f1923',
             border: '1px solid #1e2d3d',
             borderRadius: '8px',
@@ -528,9 +545,9 @@ export default function RppgDemo() {
                   outline: 'none',
                 }}
               />
-              <Link className="text-[10px] text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-95 mb-3 hover:underline!" to="/dashboard">{"Don't have API key? Click here"}</Link>
+              <Link className="text-[10px] text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-95 hover:underline!" to="/dashboard">{"Don't have API key? Click here"}</Link>
             </div>
-            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '12px' }}>
               <button
                 onClick={() => setShowTokenPrompt(false)}
                 style={{
