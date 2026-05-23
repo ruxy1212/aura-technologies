@@ -1,6 +1,6 @@
 export default function VideoContainer({ isStreaming, videoRef, canvasRef, status, talking, onLaunch, stopPipeline }) {
   return (
-    <div className="scan-overlay w-full bg-[#0a1520] rounded-[10px] overflow-hidden shrink-0 aspect-3/4 lg:aspect-4/3" style={{ border: '1px solid #1e2d3d' }}>
+    <div className="scan-overlay w-full bg-[#0a1520] rounded-[10px] overflow-hidden shrink-0 aspect-3/4 md:aspect-4/3" style={{ border: '1px solid #1e2d3d' }}>
       <video
         ref={videoRef}
         autoPlay playsInline muted
