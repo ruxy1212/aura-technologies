@@ -3,9 +3,15 @@ import { useAuth } from '../../hooks/useAuth';
 import AppLayout from './layouts/AppLayout';
 import DashboardPage from './pages/Dashboard';
 import './index.css'
+import { useEffect } from 'react';
+import { wakeServer } from '../../api/serverCheck';
 
 export default function App() {
   const { user, loading, logout, refresh } = useAuth();
+
+  useEffect(() =>{
+    wakeServer();
+  }, []);
 
   if (loading) {
     return <Splash />;

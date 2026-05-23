@@ -152,7 +152,7 @@ export default function DashboardPage({ user, onRefresh }) {
         </Panel>
 
         {/* ── Feature weights ── */}
-        <Panel title="FEATURE PRICING" tag="CU/MIN">
+        <Panel title="TELEMETRY PRICING" tag="CU/MIN">
           <table className={styles.featureTable}>
             <thead>
               <tr>

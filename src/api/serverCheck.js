@@ -8,20 +8,20 @@ export async function wakeServer() {
   }
 }
 
-export async function pollServer(setError) {
+export async function pollServer(setError = null) {
   const MAX_RETRIES = 10;
   const INTERVAL_MS = 5000;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    if (attempt === 1) setError('Waiting for the compose server to wake up.');
+    if (attempt === 1 && setError) setError('Waiting for the compose server to wake up.');
 
-    if (attempt === MAX_RETRIES) setError('Compose server did not respond in time. Please try again shortly.')
+    if (attempt === MAX_RETRIES && setError) setError('Compose server did not respond in time. Please try again shortly.')
 
     try {
       const res = await fetch(`${BASE}/health`);
       if (res.ok) {
         const data = await res.json();
-        if (data?.status === 'ok' && data?.bundleReady === true) {
+        if (data?.status === 'ok' && data?.websocket === 'ready') {
           return true;
         }
       }

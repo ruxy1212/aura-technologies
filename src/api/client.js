@@ -1,3 +1,5 @@
+import { pollServer } from "./serverCheck";
+
 const BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8007';
 
 function apiKey() {
@@ -5,6 +7,11 @@ function apiKey() {
 }
 
 async function request(path, options = {}) {
+  const serverReady = await pollServer();
+  if (!serverReady) {
+      throw new Error('Compose server is not responding. Please try again later.');
+  }
+
   const headers = { 'Content-Type': 'application/json', ...options.headers };
   const key = apiKey();
   if (key) headers['Authorization'] = `Bearer ${key}`;

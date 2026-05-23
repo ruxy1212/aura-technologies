@@ -47,7 +47,7 @@ export default function LoginPage({ onLogin }) {
       localStorage.setItem('api_key', api_key);
       const profile = await fetchProfile();
       
-      if (profile.company && profile.use_case) {
+      if (profile.company || profile.use_case) {
         onLogin(api_key);
       } else {
         setTempApiKey(api_key);
@@ -162,7 +162,7 @@ export default function LoginPage({ onLogin }) {
             <span className={styles.dot} />
             <span className={styles.dot} style={{ opacity: 0.5 }} />
             <span className={styles.dot} style={{ opacity: 0.25 }} />
-            <span className={styles.cardTitle}>AURA TERMINAL</span>
+            <span className={styles.cardTitle}>PASSWORDLESS SIGNUP</span>
           </div>
 
           {step === STEPS.EMAIL && (
@@ -179,7 +179,7 @@ export default function LoginPage({ onLogin }) {
               />
               {error && <p className={styles.error}>{error}</p>}
               <button className={styles.btn} type="submit" disabled={busy}>
-                {busy ? 'SENDING...' : 'CONTINUE →'}
+                {busy ? 'SENDING LINK...' : 'CONTINUE →'}
               </button>
             </form>
           )}
@@ -250,22 +250,24 @@ export default function LoginPage({ onLogin }) {
           )}
         </div>
 
-        <p className={styles.footnote}>
+        {/* <p className={styles.footnote}>
           No passwords. No OAuth. Just a link.
-        </p>
+        </p> */}
       </div>
-      <ul className={`${styles.statList} pb-14 flex md:hidden`}>
-        {[
-          ['PLATFORM', 'REST & WebSockets'],
-          ['TELEMETRY', 'Live Now'],
-          ['SENTIENCE', 'Coming Soon'],
-        ].map(([label, val]) => (
-          <li key={label} className={styles.statItem}>
-            <span className={styles.statLabel}>{label}</span>
-            <span className={styles.statValue}>{val}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="px-5 pb-14 md:hidden">
+        <ul className={`${styles.statList} flex md:hidden`}>
+          {[
+            ['PLATFORM', 'REST & WebSockets'],
+            ['TELEMETRY', 'Live Now'],
+            ['SENTIENCE', 'Coming Soon'],
+          ].map(([label, val]) => (
+            <li key={label} className={styles.statItem}>
+              <span className={styles.statLabel}>{label}</span>
+              <span className={styles.statValue}>{val}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

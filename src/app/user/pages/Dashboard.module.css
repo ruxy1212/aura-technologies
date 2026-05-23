@@ -72,7 +72,7 @@
   letter-spacing: 0.10em;
   color: var(--signal);
   background: var(--signal-faint);
-  border: 1px solid rgba(30, 77, 120, 0.25);
+  border: 1px solid var(--signal-subtle);
   border-radius: var(--r-sm);
   padding: 2px 7px;
 }
@@ -207,7 +207,7 @@
   font-size: 11px;
   color: var(--signal);
   background: var(--signal-faint);
-  border: 1px solid rgba(30, 77, 120, 0.25);
+  border: 1px solid var(--signal-subtle);
   border-radius: var(--r-sm);
   padding: 8px 12px;
 }

@@ -13,15 +13,16 @@
   --border-bright:  rgba(30, 45, 61, 1);
 
   /* Primary accent */
-  --signal:         #1e4d78;
-  --signal-dim:     rgba(30, 77, 120, 0.6);
-  --signal-faint:   rgba(30, 77, 120, 0.15);
-  --signal-glow:    0 0 12px rgba(30, 77, 120, 0.35);
+  --signal-subtle:  #1e4d78;
+  --signal:         #9cf0ff;
+  --signal-dim:     #00d4ff;
+  --signal-faint:   rgba(30, 77, 120, 0.25);
+  --signal-glow:    0 0 12px rgba(0, 212, 255, 0.35);
 
   /* Secondary accent */
-  --amber:          #1e4d78;
-  --amber-dim:      rgba(30, 77, 120, 0.65);
-  --amber-faint:    rgba(30, 77, 120, 0.12);
+  --amber:          #d4af37;
+  --amber-dim:      rgba(212, 175, 55, 0.65);
+  --amber-faint:    rgba(212, 175, 55, 0.12);
 
   /* Red — errors / critical */
   --red:            #fc8181;
@@ -30,8 +31,8 @@
   /* Text */
   --text-primary:   #e2e8f0;
   --text-secondary: #a0aec0;
-  --text-dim:       #4a5568;
-  --text-mono:      #1e4d78;
+  --text-dim:       #a1b1cd;
+  --text-mono:      #9cf0ff;
 
   /* Typography */
   --font-mono:  'DM Mono', 'Courier New', monospace;
@@ -46,7 +47,6 @@
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
-  /* padding: 0; */
 }
 
 html, body, #root {
@@ -69,19 +69,8 @@ body {
 button {
   font-family: var(--font-mono);
   cursor: pointer;
-  /* border: none; */
-  /* background: none; */
 }
 
 input {
   font-family: var(--font-mono);
 }
-
-a {
-  /* color: var(--signal); */
-  text-decoration: none;
-}
-
-/* a:hover {
-  text-decoration: underline;
-} */
