@@ -67,7 +67,7 @@ export default function RppgDemo() {
     setLowerBreathSnap([]);
   }, []);
 
-  const handleMessage = useCallback((event) => { console.log('in message', event)
+  const handleMessage = useCallback((event) => {
     const d = JSON.parse(event.data);
     if (d?.error) {
       setStreamError(typeof d.error === 'string' ? d.error : 'Stream error.');
@@ -124,13 +124,13 @@ export default function RppgDemo() {
     const ws = wsStream(token);
     wsRef.current = ws;
 
-    ws.onopen = () => { console.log('in open')
+    ws.onopen = () => {
       setIsStreaming(true);
     };
 
     ws.onmessage = handleMessage;
 
-    ws.onclose = () => { console.log('in close')
+    ws.onclose = () => {
       setIsStreaming(false);
       clearTimeout(loopRef.current);
     };
@@ -196,19 +196,21 @@ export default function RppgDemo() {
       const d = accumulatorRef.current;
       if (!d) return;
 
-      setPulseRate(d.pulse_rate);
-      setHrv(d.hrv);
-      setBreathing(prev => {
-        if (!d?.breathing) return prev; // Guard against empty data
-        return {
-          ...prev,
-          ...d.breathing,
-          out_of_frame: d.breathing.out_of_frame ?? prev.out_of_frame ?? false
-        };
-      });
-      setExpression(d.expression);
-      setBlink(d.blink);
-      setTalking(d.talking);
+      if (d.pulse_rate) setPulseRate(d.pulse_rate);
+      if (d.hrv) setHrv(d.hrv);
+      if (d.breathing) {
+        setBreathing(prev => {
+          if (!d?.breathing) return prev; // Guard against empty data
+          return {
+            ...prev,
+            ...d.breathing,
+            out_of_frame: d.breathing.out_of_frame ?? prev.out_of_frame ?? false
+          };
+        });
+      }
+      if (d.expression) setExpression(d.expression);
+      if (d.blink) setBlink(d.blink);
+      if (typeof d.talking === 'boolean') setTalking(d.talking);
       setStatus({ faceDetected: d.face_detected, buffer: d.buffer_status, motion_artifact: d.motion_artifact ?? false });
     }, 2000);
     return () => clearInterval(interval);
