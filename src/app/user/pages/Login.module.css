@@ -2,6 +2,7 @@
   display: flex;
   min-height: 100vh;
   min-height: 100dvh;
+  user-select: none;
 }
 
 /* ── Brand / left panel ── */
@@ -190,7 +191,7 @@
 }
 
 .input::placeholder {
-  color: var(--site-text-muted);
+  color: var(--signal-subtle);
 }
 
 .input:focus {
@@ -204,7 +205,7 @@
   background: var(--signal-dim);
   border: 1px solid var(--signal-dim);
   border-radius: var(--r-md);
-  color: #ffffff;
+  color: var(--signal-subtle);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -213,6 +214,7 @@
 }
 
 .btn:hover:not(:disabled) {
+  color: #ffffff;
   background: rgba(30, 77, 120, 0.18);
   box-shadow: var(--signal-glow);
 }
@@ -234,13 +236,12 @@
   transition: border-color 0.15s, color 0.15s;
 }
 
-.btnGhost:hover {
+.btnGhost:hover:not(:disabled) {
   border-color: var(--border-bright);
   color: var(--text-primary);
 }
 
 .btnGhost:disabled {
-  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -264,7 +265,7 @@
   margin-left: auto;
 }
 
-.skipLink:hover {
+.skipLink:hover:not(:disabled) {
   color: var(--signal);
   text-decoration: none;
 }

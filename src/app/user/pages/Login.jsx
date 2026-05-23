@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { requestMagicLink, verifyMagicLink, fetchProfile, updateProfile } from '../../../api/client';
 import EcgLine from '../components/EcgLine';
 import styles from './Login.module.css';
+import { Link } from 'react-router-dom';
 
 const STEPS = { EMAIL: 'email', SENT: 'sent', VERIFYING: 'verifying', COMPANY_INFO: 'company_info' };
 
@@ -114,7 +115,7 @@ export default function LoginPage({ onLogin }) {
       {/* Left panel — branding */}
       <div className={styles.brand}>
         <div className={styles.brandInner}>
-          <div className={styles.logoMark}>
+          <Link to="/" className={styles.logoMark}>
             <span className={styles.logoText}>
               <svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg" height="40">
                 <defs>
@@ -132,7 +133,7 @@ export default function LoginPage({ onLogin }) {
                 </g>
               </svg>
             </span>
-          </div>
+          </Link>
           <p className={styles.tagline}>
             Contactless health-sensing SDK and<br />voice-based intellisense infrastructure
           </p>

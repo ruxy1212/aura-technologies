@@ -38,6 +38,7 @@ function InfoRow({ label, value, mono, accent }) {
 export default function DashboardPage({ user, onRefresh }) {
   const [keyVisible, setKeyVisible]   = useState(false);
   const [rotating, setRotating]       = useState(false);
+  const [confirmRotate, setConfirmRotate] = useState(false);
   const [rotateError, setRotateError] = useState('');
   const [justRotated, setJustRotated] = useState(false);
   const [copied, setCopied]           = useState(false);
@@ -49,11 +50,18 @@ export default function DashboardPage({ user, onRefresh }) {
     : '—';
 
   async function handleRotate() {
-    if (!window.confirm('Rotate API key? Your current key will stop working immediately.')) return;
+    setConfirmRotate(true);
+  }
+
+  async function performRotate() {
+    setConfirmRotate(false);
     setRotating(true);
     setRotateError('');
     try {
-      await rotateKey();
+      const resp = await rotateKey();
+      if (resp && resp.api_key) {
+        localStorage.setItem('api_key', resp.api_key);
+      }
       await onRefresh();
       setJustRotated(true);
       setKeyVisible(true);
@@ -178,6 +186,29 @@ export default function DashboardPage({ user, onRefresh }) {
         </Panel>
 
       </div>
+
+      {confirmRotate && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3>Rotate API Key?</h3>
+            <p>Your current key will stop working immediately.</p>
+            <div className={styles.modalActions}>
+              <button 
+                className={styles.modalBtn} 
+                onClick={() => setConfirmRotate(false)}
+              >
+                CANCEL
+              </button>
+              <button 
+                className={`${styles.modalBtn} ${styles.dangerBtn}`} 
+                onClick={performRotate}
+              >
+                ROTATE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -273,6 +273,84 @@
   padding-top: 10px !important;
 }
 
+/* ── Modal ── */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.modalContent h3 {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modalContent p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modalBtn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  transition: background 0.14s;
+  cursor: pointer;
+}
+
+.modalBtn:hover {
+  background: var(--bg-elevated);
+}
+
+.dangerBtn {
+  background: var(--red-faint);
+  border: 1px solid rgba(255, 77, 77, 0.4);
+  color: var(--red);
+}
+
+.dangerBtn:hover {
+  background: rgba(255, 77, 77, 0.15);
+}
+
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .grid {
