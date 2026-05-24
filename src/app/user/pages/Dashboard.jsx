@@ -35,7 +35,11 @@ function InfoRow({ label, value, mono, accent }) {
   );
 }
 
+import usePageTitle from '../../../hooks/usePageTitle';
+
 export default function DashboardPage({ user, onRefresh }) {
+  usePageTitle('Dashboard');
+
   const [keyVisible, setKeyVisible]   = useState(false);
   const [rotating, setRotating]       = useState(false);
   const [confirmRotate, setConfirmRotate] = useState(false);

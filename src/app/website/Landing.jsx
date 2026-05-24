@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Landing.module.css';
 import Hero from './Hero';
+import usePageTitle from '../../hooks/usePageTitle';
 
 const PRODUCTS = [
   {
@@ -79,6 +80,8 @@ const FAQS = [
 ];
 
 export default function Landing() {
+  usePageTitle('Home');
+
   return (
     <div className={styles.root}>
       <Hero />
@@ -178,7 +181,7 @@ export default function Landing() {
             </p>
           </div>
           <div className={styles.ctaActions}>
-            <a href="mailto:support@auratechnologies.com" className="font-data-mono text-data-mono border border-outline-variant/50 text-on-surface px-8 py-4 rounded-DEFAULT hover:border-primary/50 hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface/50 backdrop-blur-sm relative group overflow-hidden active:scale-95 w-full sm:w-auto">
+            <a href="mailto:info@ruxy.tech" className="font-data-mono text-data-mono border border-outline-variant/50 text-on-surface px-8 py-4 rounded-DEFAULT hover:border-primary/50 hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface/50 backdrop-blur-sm relative group overflow-hidden active:scale-95 w-full sm:w-auto">
               <span className="relative z-10">CONTACT SALES</span>
               <div className="absolute inset-0 bg-primary/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </a>

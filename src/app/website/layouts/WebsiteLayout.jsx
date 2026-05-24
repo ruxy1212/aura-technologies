@@ -79,12 +79,12 @@ export default function WebsiteLayout() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerBrand}>
-            <span className="text-primary-fixed">© 2026 Aura Technologies. All rights reserved.</span>
+            <span className="text-primary-fixed">© 2026 Aura Spectrum. All rights reserved.</span>
           </div>
           <div className={styles.footerLinks}>
             <NavLink to="/terms">Terms</NavLink>
             <NavLink to="/privacy">Privacy</NavLink>
-            <a href="mailto:support@auratechnologies.com">Contact</a>
+            <a href="mailto:info@ruxy.tech">Contact</a>
           </div>
         </div>
       </footer>

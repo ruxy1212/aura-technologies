@@ -3,10 +3,13 @@ import { requestMagicLink, verifyMagicLink, fetchProfile, updateProfile } from '
 import EcgLine from '../components/EcgLine';
 import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
+import usePageTitle from '../../../hooks/usePageTitle';
 
 const STEPS = { EMAIL: 'email', SENT: 'sent', VERIFYING: 'verifying', COMPANY_INFO: 'company_info' };
 
 export default function LoginPage({ onLogin }) {
+  usePageTitle('Login');
+
   const [step, setStep]         = useState(STEPS.EMAIL);
   const [email, setEmail]       = useState('');
   const [company, setCompany]   = useState('');

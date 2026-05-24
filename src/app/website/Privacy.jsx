@@ -1,10 +1,13 @@
 import styles from './Legal.module.css';
+import usePageTitle from '../../hooks/usePageTitle';
 
 export default function Privacy() {
+  usePageTitle('Privacy Policy');
+
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <p className={styles.subtitle}>AURA TECHNOLOGIES</p>
+        <p className={styles.subtitle}>AURA SPECTRUM</p>
         <h1 className={styles.title}>Privacy Policy</h1>
         <p className={styles.subtitle}>Last updated: May 21, 2026</p>
       </header>
@@ -12,7 +15,7 @@ export default function Privacy() {
       <section className={styles.section}>
         <h2>1. SUMMARY</h2>
         <p>
-          This Privacy Policy explains how Aura Technologies ("we," "our," or "us") collects, uses, processes, 
+          This Privacy Policy explains how Aura Spectrum Inc. ("we," "our," or "us") collects, uses, processes, 
           and protects your information when you interact with our SDKs, APIs, and WebSockets—specifically 
           the <strong>AuRa Telemetry</strong> and <strong>AuRa Sentience</strong> engines. Privacy is built 
           into our architecture by design. For developers integrating our Service into third-party applications, 
@@ -62,7 +65,7 @@ export default function Privacy() {
         </p>
         <ul>
           <li><strong>Service Providers:</strong> With trusted infrastructure providers (cloud hosting, database management, email delivery) who are bound by strict confidentiality and data protection agreements.</li>
-          <li><strong>Legal Requirements:</strong> If required by law, subpoena, or other legal processes, or to protect the rights, property, or safety of Aura Technologies, our users, or the public.</li>
+          <li><strong>Legal Requirements:</strong> If required by law, subpoena, or other legal processes, or to protect the rights, property, or safety of Aura Spectrum Inc., our users, or the public.</li>
         </ul>
       </section>
 
@@ -98,7 +101,7 @@ export default function Privacy() {
         <h2>9. CONTACT INFORMATION</h2>
         <div className={styles.contact}>
           <span>For privacy inquiries, data deletion requests, or questions regarding this policy, please contact us at:</span>
-          <a href="mailto:support@auratechnologies.com">support@auratechnologies.com</a>
+          <a href="mailto:info@ruxy.tech">info@ruxy.tech</a>
         </div>
       </section>
     </div>

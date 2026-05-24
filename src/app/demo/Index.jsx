@@ -10,9 +10,12 @@ import ExpressionPanel from "./_fragments/ExpressionPanel";
 import { wsStream } from "../../api/client";
 import { pollServer, wakeServer } from "../../api/serverCheck";
 import { Link } from "react-router-dom";
+import usePageTitle from "../../hooks/usePageTitle";
 
 // ─── Main dashboard ───────────────────────────────────────────────────────────
 export default function RppgDemo() {
+  usePageTitle('Live Demo');
+
   const videoRef  = useRef(null);
   const canvasRef = useRef(null);
   const wsRef     = useRef(null);

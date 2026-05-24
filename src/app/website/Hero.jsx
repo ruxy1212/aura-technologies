@@ -17,7 +17,7 @@ export default function Hero() {
           <div className="flex flex-col gap-4 text-center">
             <div className="infinite-progress absolute top-8 left-0"></div>
             <div className="inline-flex items-center justify-center gap-2 mb-2">
-              <span className="font-label-caps text-label-caps text-primary-fixed uppercase text-[10px] tracking-[0.3em]">AURA TECHNOLOGIES</span>
+              <span className="font-label-caps text-label-caps text-primary-fixed uppercase text-[10px] tracking-[0.3em]">AURA SPECTRUM</span>
             </div>
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight leading-[1.1]">
               Multimodal Intellisense infrastructure.
@@ -87,7 +87,7 @@ export default function Hero() {
       <section className="desktop-hero hidden relative min-h-[90vh] items-center pt-8 md:pt-16 pb-16 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto md:flex">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-gutter w-full relative z-10 items-center text-center lg:text-left">
           <div className="lg:col-span-6 flex flex-col items-center lg:items-start gap-6 md:gap-8 z-20">
-            <span className="font-data-mono text-data-mono text-primary tracking-[0.5em]">AURA TECHNOLOGIES</span>
+            <span className="font-data-mono text-data-mono text-primary tracking-[0.5em]">AURA SPECTRUM</span>
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-surface max-w-[15ch] mx-auto lg:mx-0">
               Multimodal Intellisense <span className="text-gradient">infrastructure.</span>
             </h1>
@@ -107,7 +107,7 @@ export default function Hero() {
           </div>
           <div className="lg:col-span-6 relative mt-8 lg:mt-0 z-10 w-full aspect-4/5 sm:aspect-4/3 lg:aspect-square flex items-center justify-center">
             <div className="absolute inset-0 rounded-xl overflow-hidden border border-outline-variant/20 shadow-[0_0_40px_rgba(0,218,243,0.05)]">
-              <img alt="AuRa Technologies" className="w-full h-full object-cover opacity-80 mix-blend-lighten" src="/hero.webp" />
+              <img alt="AuRa Spectrum" className="w-full h-full object-cover opacity-80 mix-blend-lighten" src="/hero.webp" />
               <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent"></div>
               <div className="absolute inset-0 bg-linear-to-b from-transparent via-primary/10 to-transparent h-32 w-full animate-scan pointer-events-none"></div>
             </div>

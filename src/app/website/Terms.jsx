@@ -1,10 +1,13 @@
 import styles from './Legal.module.css';
+import usePageTitle from '../../hooks/usePageTitle';
 
 export default function Terms() {
+  usePageTitle('Terms of Service');
+
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <p className={styles.subtitle}>AURA TECHNOLOGIES</p>
+        <p className={styles.subtitle}>AURA SPECTRUM</p>
         <h1 className={styles.title}>Terms of Service</h1>
         <p className={styles.subtitle}>Last updated: May 21, 2026</p>
       </header>
@@ -13,7 +16,7 @@ export default function Terms() {
         <h2>1. OVERVIEW AND ACCEPTANCE OF TERMS</h2>
         <p>
           These Terms of Service ("Terms") govern your use of the APIs, WebSockets, SDKs, and associated software 
-          provided by Aura Technologies ("we," "us," or "our"), including but not limited to the <strong>AuRa Telemetry</strong> 
+          provided by Aura Spectrum Inc. ("we," "us," or "our"), including but not limited to the <strong>AuRa Telemetry</strong> 
           and <strong>AuRa Sentience</strong> engines (collectively, the "Service"). By accessing or using the Service, 
           you agree to be bound by these Terms on behalf of yourself or the entity you represent. If you do not agree 
           with these Terms, you may not use the Service.
@@ -55,7 +58,7 @@ export default function Terms() {
         <p>
           The Service operates on a usage-based billing model measured in Compute Units (CU). Features are charged at a 
           specific CU rate per minute. Free tiers are granted a strictly limited monthly balance that resets periodically. 
-          Aura Technologies reserves the right to modify CU pricing, change tier limits, or transition features from free 
+          Aura Spectrum Inc. reserves the right to modify CU pricing, change tier limits, or transition features from free 
           to paid at our sole discretion upon reasonable notice. Overage or usage beyond free tiers will require an upgraded 
           subscription plan. We reserve the right to automatically terminate data streams or suspend your account if your 
           CU balance is exhausted or your account falls into arrears.
@@ -78,8 +81,8 @@ export default function Terms() {
         <h2>6. INTELLECTUAL PROPERTY</h2>
         <p>
           All rights, title, and interest in and to the Service, including all models, algorithms, algorithms, APIs, SDKs, 
-          and documentation, are and will remain the exclusive property of Aura Technologies and its licensors. These Terms 
-          do not grant you any right to use the Aura Technologies trademarks, logos, or brand features without our prior 
+          and documentation, are and will remain the exclusive property of Aura Spectrum Inc. and its licensors. These Terms 
+          do not grant you any right to use the Aura Spectrum Inc. trademarks, logos, or brand features without our prior 
           written consent.
         </p>
       </section>
@@ -88,7 +91,7 @@ export default function Terms() {
         <h2>7. WARRANTIES AND DISCLAIMERS</h2>
         <p>
           THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. 
-          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, AURA TECHNOLOGIES EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING, 
+          TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, AURA SPECTRUM INC. EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING, 
           BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND 
           ACCURACY OF THE BIOMETRIC OR COGNITIVE DATA PRODUCED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, 
           SECURE, OR ERROR-FREE.
@@ -98,17 +101,17 @@ export default function Terms() {
       <section className={styles.section}>
         <h2>8. LIMITATION OF LIABILITY</h2>
         <p>
-          TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT WILL AURA TECHNOLOGIES OR ITS AFFILIATES BE LIABLE FOR ANY 
+          TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT WILL AURA SPECTRUM INC. OR ITS AFFILIATES BE LIABLE FOR ANY 
           INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR MULTIPLE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, 
           WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING 
-          FROM YOUR ACCESS TO OR USE OF THE SERVICE, EVEN IF AURA TECHNOLOGIES HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+          FROM YOUR ACCESS TO OR USE OF THE SERVICE, EVEN IF AURA SPECTRUM INC. HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
         </p>
       </section>
 
       <section className={styles.section}>
         <h2>9. MODIFICATIONS TO TERMS</h2>
         <p>
-          Aura Technologies reserves the right to modify these Terms at any time. We will post the most current version of 
+          Aura Spectrum Inc. reserves the right to modify these Terms at any time. We will post the most current version of 
           these Terms on this page with the "Last updated" date. By continuing to access or use the Service after revisions 
           become effective, you agree to be bound by the revised Terms.
         </p>
@@ -118,7 +121,7 @@ export default function Terms() {
         <h2>10. CONTACT</h2>
         <div className={styles.contact}>
           <span>If you have any questions about these Terms, please contact us at:</span>
-          <a href="mailto:support@auratechnologies.com">support@auratechnologies.com</a>
+          <a href="mailto:info@ruxy.tech">info@ruxy.tech</a>
         </div>
       </section>
     </div>

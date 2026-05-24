@@ -1,0 +1,32 @@
+# AuRa Spectrum - Project Overview for LLMs
+
+## What is AuRa?
+AuRa Spectrum Inc. provides a contactless health-sensing and intent-sensing SDK that extracts real-time biometric signals from standard cameras without wearables. It operates using advanced signal processing and AI.
+
+## Engines & Features
+### 1. Telemetry (Live Now)
+Remote photoplethysmography (rPPG) and multimodal intellisense.
+- Pulse Rate (2.0 CU/min): Extracts real-time HR via subtle skin color changes.
+- Heart Rate Variability (1.0 CU/min): Analyzes inter-beat intervals for stress and recovery.
+- Breathing Rate & Flow (2.0 CU/min): Tracks chest/shoulder movement for respiratory metrics.
+- Facial Expression (1.0 CU/min): Captures emotional responses via facial landmarks.
+- Eye Blink Detection (0.5 CU/min): Monitors blink frequency/duration for cognitive load.
+- Talking Detection (0.5 CU/min): Determines when the user is speaking.
+
+### 2. Sentience (Coming Soon)
+Voice-based intellisense. Listens and interprets vocal signals to analyze stress, depression, and advanced cognitive states in real time.
+
+## SDK & Integration
+- **Currently Available**: REST API / WebSockets
+- **Coming Soon**: Android SDK, iOS SDK, Desktop Native (C++)
+
+## Pricing (Compute Units - CU)
+- Starter: Free (1,000 CU/month). Includes Demo access, API key, Community support.
+- Pro: Custom pricing (Usage-based CU). Higher limits, priority support, volume pricing.
+- Enterprise: Custom pricing (Dedicated infra, private deployments, SLA, Compliance review).
+
+## FAQ
+- Q: Is AuRa FDA-approved?
+  A: No. AuRa Telemetry provides informational signals for wellness/research and is not an FDA-approved medical device.
+- Q: How does AuRa protect user privacy?
+  A: Privacy by design. No video or facial images are stored or transmitted. Only anonymized telemetry metrics are extracted and securely delivered.

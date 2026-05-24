@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './Docs.module.css';
+import usePageTitle from '../../hooks/usePageTitle';
 
 function Section({ id, title, children }) {
   return (
@@ -104,6 +105,8 @@ const TOC = [
 ];
 
 export default function DocsPage() {
+  usePageTitle('Documentation');
+
   const [activeId, setActiveId] = useState('overview');
 
   function scrollTo(id) {

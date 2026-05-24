@@ -1,16 +1,15 @@
-# React + Vite
+# AuRa Spectrum
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AuRa Spectrum Inc. provides a state-of-the-art contactless health-sensing engines. It turns a standard camera into a real-time biometric sensor, tracking subtle micromovements and color variations to extract anonymized health metrics (pulse, HRV, breathing, expressions) without the need for wearables.
 
-Currently, two official plugins are available:
+## Engines
+- **Telemetry**: Remote photoplethysmography (rPPG) and multimodal intellisense for real-time biometrics.
+- **Sentience**: (Coming Soon) Voice-based intellisense for analyzing stress and cognitive states.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started
+1. Access the web dashboard or demo endpoints.
+2. Integrate via our secure REST API or WebSockets using your API Key.
+3. Extract insights using our transparent, usage-based Compute Unit (CU) pricing.
 
-## React Compiler
+*Note: AuRa is not an FDA-approved medical device. It is intended for wellness applications, product experiences, and research.*
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
