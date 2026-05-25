@@ -170,7 +170,7 @@
   font-size: 9px;
   letter-spacing: 0.2em;
   color: #07111a;
-  background: linear-gradient(120deg, #63b3ed, #1e4d78);
+  background: var(--site-blue);
   padding: 7px 12px;
   border-radius: 999px;
   border: 1px solid rgba(99, 179, 237, 0.45);

@@ -46,7 +46,7 @@ export default function WebsiteLayout() {
         </nav>
 
         <div className={styles.navActions}>
-          <NavLink className="font-label-caps text-label-caps bg-primary text-on-primary px-6 py-2 rounded-DEFAULT active:scale-95 transition-transform hover:bg-primary-fixed duration-300 hidden md:block" to="/auth">
+          <NavLink className="font-label-caps text-label-caps bg-primary text-on-primary px-6 py-2 rounded-DEFAULT active:scale-95 transition-transform hover:bg-primary-fixed duration-300" to="/auth">
             Get API Key
           </NavLink>
         </div>
